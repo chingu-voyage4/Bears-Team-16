@@ -1,11 +1,13 @@
-const morgan = require(`morgan`);
-const bodyParser = require(`body-parser`);
-const app = require(`express`)();
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
 
 // Application config
-require(`dotenv`).config();
-
 const { env } = process;
+dotenv.config();
+export const app = express();
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan(`dev`));
@@ -17,5 +19,3 @@ app.get(`/`, (req, res) => {
 });
 
 app.listen(env.PORT, console.log(`There will be dragons on ${env.HOST}:${env.PORT}.`));
-
-module.exports = app;

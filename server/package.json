@@ -32,10 +32,13 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "mocha --recursive ./test --exit",
-    "test:e2e": "mocha --recursive ./test/e2e --exit",
-    "test:unit": "mocha --recursive ./test/unit --exit",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "test":
+      "mocha --require babel-register --require babel-polyfill --recursive ./test --exit",
+    "test:e2e":
+      "mocha --require babel-register --require babel-polyfill --recursive ./test/e2e --exit",
+    "test:unit":
+      "mocha --require babel-register --require babel-polyfill --recursive ./test/unit --exit",
     "tdd": "npm run test:unit --watch"
   }
 }

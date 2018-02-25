@@ -1,7 +1,6 @@
-const { expect } = require(`chai`);
-const request = require(`supertest`);
-const app = require(`../../src`);
-
+import { expect } from 'chai';
+import request from 'supertest';
+import { app } from '../../src';
 // Example test
 describe(`GET /`, () => {
   it(`should return status 200`, () =>
