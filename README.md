@@ -1,4 +1,4 @@
-# Voyage-4 Bears-Team-16
+# Voyage-4 Bears-Team-16 [![Build Status](https://travis-ci.org/chingu-voyage4/Bears-Team-16.svg?branch=development)](https://travis-ci.org/chingu-voyage4/Bears-Team-16)
 
 ## Description
 
