@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3005;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan(`dev`));
+app.use(require(`cors`)());
 
 // Route
 app.get(`/`, (req, res) => {
