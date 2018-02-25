@@ -62,7 +62,7 @@ typings/
 .env.production.local
 
 # Production
-client/build
+build
 
 # Misc
 .DS_Store

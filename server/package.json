@@ -28,14 +28,17 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "build": "babel -d ./build ./src",
+    "prebuild": "rm -rf ./build",
+    "start": "NODE_ENV=production node ./build/index.js",
+    "prestart": "npm run build",
     "dev": "nodemon src/index.js --exec babel-node",
     "test":
       "mocha -r babel-register -r babel-polyfill --recursive ./test --exit",
     "test:e2e":
       "mocha -r babel-register -r babel-polyfill --recursive ./test/e2e --exit",
     "test:unit":
-      "mocha --require babel-register --require babel-polyfill --recursive ./test/unit --exit",
+      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
     "tdd": "npm run test:unit --watch"
   }
 }
