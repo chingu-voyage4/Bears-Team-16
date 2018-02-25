@@ -16,3 +16,5 @@ app.get(`/`, (req, res) => {
 });
 
 app.listen(PORT, console.log(`There will be dragons on port ${PORT}.`));
+
+module.exports = app;
