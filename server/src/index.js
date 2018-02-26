@@ -15,7 +15,7 @@ app.use(require(`cors`)());
 
 // Route
 app.get(`/`, (req, res) => {
-  res.json(`Howdy`);
+    res.json(`Howdy`);
 });
 
 app.listen(env.PORT, console.log(`There will be dragons on ${env.HOST}:${env.PORT}.`));
