@@ -20,12 +20,12 @@ app.get(`/`, (req, res) => { res.json(`Howdy`); });
 
 // GraphiQL
 app.use(
-    `/graphql`,
-    bodyParser.json(),
-    graphqlHTTP({
-        schema,
-        graphiql: true,
-    }),
+  `/graphql`,
+  bodyParser.json(),
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  }),
 );
 
 

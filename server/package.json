@@ -1,52 +1,51 @@
 {
-    "name": "server",
-    "version": "0.1.0",
-    "dependencies": {
-        "body-parser": "^1.18.2",
-        "bookshelf": "^0.12.1",
-        "cors": "^2.8.4",
-        "dotenv": "^5.0.0",
-        "express": "^4.16.2",
-        "express-graphql": "^0.6.12",
-        "graphql": "^0.13.1",
-        "graphql-tools": "^2.21.0",
-        "knex": "^0.14.4",
-        "morgan": "^1.9.0",
-        "pg": "^7.4.1"
-    },
-    "devDependencies": {
-        "babel-cli": "^6.26.0",
-        "babel-eslint": "^8.2.2",
-        "babel-polyfill": "^6.26.0",
-        "babel-preset-env": "^1.6.1",
-        "chai": "^4.1.2",
-        "eslint": "^4.18.1",
-        "eslint-config-airbnb": "^16.1.0",
-        "eslint-plugin-import": "^2.9.0",
-        "eslint-plugin-jsx-a11y": "^6.0.3",
-        "eslint-plugin-react": "^7.7.0",
-        "mocha": "^5.0.1",
-        "nodemon": "^1.15.1",
-        "prettier": "^1.10.2",
-        "supertest": "^3.0.0"
-    },
-    "scripts": {
-        "build": "babel -d ./build ./src",
-        "prebuild": "rm -rf ./build",
-        "start": "NODE_ENV=production node ./build/index.js",
-        "prestart": "npm run build",
-        "dev": "nodemon src/index.js --exec babel-node",
-        "test":
-            "mocha --require babel-register --require babel-polyfill --recursive ./test --exit",
-        "test:e2e":
-            "mocha --require babel-register --require babel-polyfill --recursive ./test/e2e --exit",
-        "test:unit":
-            "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
-        "tdd": "npm run test:unit --watch",
-        "knex":
-            "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
-        "db:migrate": "npm run knex migrate:latest",
-        "db:rollback": "npm run knex migrate:rollback",
-        "db:seed": "npm run knex seed:run"
-    }
+  "name": "server",
+  "version": "0.1.0",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bookshelf": "^0.12.1",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.1",
+    "graphql-tools": "^2.21.0",
+    "knex": "^0.14.4",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "mocha": "^5.0.1",
+    "nodemon": "^1.15.1",
+    "prettier": "^1.10.2",
+    "supertest": "^3.0.0"
+  },
+  "scripts": {
+    "build": "babel -d ./build ./src",
+    "prebuild": "rm -rf ./build",
+    "start": "NODE_ENV=production node ./build/index.js",
+    "prestart": "npm run build",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "test":
+      "mocha --require babel-register --require babel-polyfill --recursive ./test --exit",
+    "test:e2e":
+      "mocha --require babel-register --require babel-polyfill --recursive ./test/e2e --exit",
+    "test:unit":
+      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
+    "tdd": "npm run test:unit --watch",
+    "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:rollback": "npm run knex migrate:rollback",
+    "db:seed": "npm run knex seed:run"
+  }
 }
