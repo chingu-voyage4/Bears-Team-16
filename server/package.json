@@ -8,6 +8,7 @@
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
         "knex": "^0.14.4",
+        "morgan": "^1.9.0",
         "pg": "^7.4.1"
   },
   "devDependencies": {
@@ -33,11 +34,16 @@
     "prestart": "npm run build",
     "dev": "nodemon src/index.js --exec babel-node",
     "test":
-      "mocha -r babel-register -r babel-polyfill --recursive ./test --exit",
+            "mocha --require babel-register --require babel-polyfill --recursive ./test --exit",
     "test:e2e":
-      "mocha -r babel-register -r babel-polyfill --recursive ./test/e2e --exit",
+            "mocha --require babel-register --require babel-polyfill --recursive ./test/e2e --exit",
     "test:unit":
       "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
-    "tdd": "npm run test:unit --watch"
+        "tdd": "npm run test:unit --watch",
+        "knex":
+            "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
+        "db:migrate": "npm run knex migrate:latest",
+        "db:rollback": "npm run knex migrate:rollback",
+        "db:seed": "npm run knex seed:run"
   }
 }
