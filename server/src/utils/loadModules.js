@@ -2,22 +2,22 @@
 require(`babel-polyfill`);
 
 export default modules => {
-    let queries = ``;
-    let mutations = ``;
-    const resolvers = {
-        RootQuery: {},
-        RootMutation: {},
-    };
+  let queries = ``;
+  let mutations = ``;
+  const resolvers = {
+    RootQuery: {},
+    RootMutation: {},
+  };
 
-    modules.forEach((module, i) => {
-        Object.assign(resolvers, module.resolvers);
-        Object.assign(resolvers.RootQuery, module.queries);
-        Object.assign(resolvers.RootMutation, module.mutations);
-        queries += module.queryText;
-        mutations += module.mutationText;
-    });
+  modules.forEach((module, i) => {
+    Object.assign(resolvers, module.resolvers);
+    Object.assign(resolvers.RootQuery, module.queries);
+    Object.assign(resolvers.RootMutation, module.mutations);
+    queries += module.queryText;
+    mutations += module.mutationText;
+  });
 
-    const schema = `
+  const schema = `
     type RootQuery {
       ${queries}
     }
@@ -30,10 +30,10 @@ export default modules => {
     }
   `;
 
-    const typeDefs = [ schema ].concat(modules.map(m => m.schema));
+  const typeDefs = [ schema ].concat(modules.map(m => m.schema));
 
-    return {
-        typeDefs,
-        resolvers,
-    };
+  return {
+    typeDefs,
+    resolvers,
+  };
 };
