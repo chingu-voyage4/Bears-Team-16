@@ -29,6 +29,8 @@
     "mocha": "^5.0.1",
     "nodemon": "^1.15.1",
     "prettier": "^1.10.2",
+    "sinon": "^4.4.2",
+    "sinon-chai": "^2.14.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
@@ -43,7 +45,7 @@
       "mocha --require babel-register --require babel-polyfill --recursive ./test/e2e --exit",
     "test:unit":
       "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
-    "tdd": "npm run test:unit --watch",
+    "tdd": "npm run test:unit -- --watch",
     "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
     "db:migrate": "npm run knex migrate:latest",
     "db:rollback": "npm run knex migrate:rollback",
