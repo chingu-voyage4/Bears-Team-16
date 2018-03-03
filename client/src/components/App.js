@@ -1,15 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Home from "./Home";
+/* LAYOUT COMPONENTS */
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+/* AUTH COMPONENTS */
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
+/* OTHER COMPONENTS */
+import Home from "./Home";
 
 const App = () => (
     <Router>
         <div>
             <Header />
             <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
             <Footer />
         </div>
     </Router>
