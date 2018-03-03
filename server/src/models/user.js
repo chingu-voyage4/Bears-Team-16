@@ -1,7 +1,7 @@
 import db from "../db";
-import Recipe from "../models/recipe";
+import { Recipe } from "../models";
 
-const User = db.Model.extend({
+export default db.Model.extend({
   tableName: `users`,
   hasTimestamps: true,
   recipes() {
@@ -12,4 +12,3 @@ const User = db.Model.extend({
   },
 });
 
-export default User;
