@@ -1,6 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import loadModules from "../utils/loadModules";
-import User from "./User";
-import Recipe from "./Recipe";
+import user from "./user";
+import recipe from "./recipe";
 
-export default makeExecutableSchema(loadModules([ User, Recipe ]));
+
+export default makeExecutableSchema(loadModules([ user, recipe ]));
