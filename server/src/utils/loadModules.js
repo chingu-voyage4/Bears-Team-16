@@ -2,35 +2,33 @@
 require(`babel-polyfill`);
 
 export default modules => {
-  let queries = ``;
-  let mutations = ``;
-  const resolvers = {
-    RootQuery: {},
-    RootMutation: {},
+  let rootQueryTypes = ``;
+  let rootMutationTypes = ``;
+  const typeDefs = [];
+  let resolvers = {
+    Query: {},
+    Mutation: {},
   };
 
+  // Iterate over passed graphql modules and merge with initialized typeDefs and resolvers
   modules.forEach((module, i) => {
-    Object.assign(resolvers, module.resolvers);
-    Object.assign(resolvers.RootQuery, module.queries);
-    Object.assign(resolvers.RootMutation, module.mutations);
-    queries += module.queryText;
-    mutations += module.mutationText;
+    rootQueryTypes += module.queryTypes;
+    rootMutationTypes += module.mutationTypes;
+    typeDefs[i + 2] = module.type; // Reserve 2 spaces for rootQuerTypes and rootMutationTypes
+    resolvers = {
+      Query: { ...resolvers.Query, ...module.queries },
+      Mutation: { ...resolvers.Mutation, ...module.mutations },
+    };
   });
 
-  const schema = `
-    type RootQuery {
-      ${queries}
-    }
-    type RootMutation {
-      ${mutations}
-    }
-    schema {
-      query: RootQuery
-      mutation: RootMutation
-    }
-  `;
-
-  const typeDefs = [ schema ].concat(modules.map(m => m.schema));
+  typeDefs[0] = `
+  type Query {
+    ${rootQueryTypes}
+  }`;
+  typeDefs[1] = `
+  type Mutation {
+    ${rootMutationTypes}
+  }`;
 
   return {
     typeDefs,
