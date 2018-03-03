@@ -1,12 +1,10 @@
 import db from '../db';
-import User from "../models/user";
+import { User } from "../models";
 
-const Recipe = db.Model.extend({
+export default db.Model.extend({
   tableName: `recipes`,
   hasTimestamps: true,
   author() {
     return this.belongTo(User);
   },
 });
-
-export default Recipe;
