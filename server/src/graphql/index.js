@@ -1,7 +1,44 @@
 import { makeExecutableSchema } from "graphql-tools";
-import loadModules from "../utils/loadModules";
 import user from "./user";
-import recipe from "./recipe";
+import * as recipe from "./recipe";
 
+// Parse and merge schemas and resolvers
+const prepareSchema = modules => {
+  let schemaQueries = ``;
+  let schemaMutations = ``;
+  let typeDefs = ``;
+  const resolvers = {
+    Query: {},
+    Mutation: {},
+  };
 
-export default makeExecutableSchema(loadModules([ user, recipe ]));
+  modules.forEach(module => {
+    // Merge resolvers
+    resolvers[module.name] = module.resolvers[module.name];
+    resolvers.Query = {
+      ...resolvers.Query,
+      ...module.resolvers.Query,
+    };
+    resolvers.Mutation = {
+      ...resolvers.Mutation,
+      ...module.resolvers.Mutation,
+    };
+
+    // Add typeDefs
+    schemaQueries += module.query;
+    schemaMutations += module.mutation;
+    typeDefs += `${module.schema}\n`;
+  });
+
+  typeDefs += `
+  type Query {
+    ${schemaQueries}
+  }
+  type Mutation {
+    ${schemaMutations}
+  }
+  `;
+  return { typeDefs, resolvers };
+};
+
+export default makeExecutableSchema(prepareSchema([ user, recipe ]));
