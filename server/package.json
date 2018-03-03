@@ -17,6 +17,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
@@ -31,7 +32,7 @@
     "supertest": "^3.0.0"
   },
   "scripts": {
-    "build": "babel -d ./build ./src",
+    "build": "babel -d ./build ./src -s --ignore ./node_modules",
     "prebuild": "rm -rf ./build",
     "start": "NODE_ENV=production node ./build/index.js",
     "prestart": "npm run build",
