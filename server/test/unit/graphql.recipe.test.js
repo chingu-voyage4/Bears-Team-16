@@ -13,9 +13,10 @@ describe(`Recipe`, () => {
     });
   });
 
-  // decribe(`queries:user`, () => {
-  //   it(`should say 'I'm a recipe!'`, () => {
-  //     expect(Recipe).
-  //   });
-  // });
+  describe(`queries:user`, () => {
+    it(`return an object with property 'id'`, () => {
+      expect(Query.recipe.resolve()).to.have.property(`id`);
+      expect(Query.recipe.resolve()).to.deep.equal({ id: `I'm a recipe!` });
+    });
+  });
 });
