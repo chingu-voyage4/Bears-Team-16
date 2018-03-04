@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 /* LAYOUT COMPONENTS */
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
+import Header from "./layout/Header/Header";
+import Footer from "./layout/Footer/Footer";
 /* AUTH COMPONENTS */
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
