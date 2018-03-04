@@ -1,18 +1,13 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-
 .header-wrapper {
     padding: 50px 10px;
-    background: #F79751;
+    background: var(--header-background-color);
     display: grid;
     grid-gap: 20px;
     grid-template-areas: "header-logo header-navbar"
 }
 
 .header-navbar {
-    grid-area:header-navbar;
+    grid-area: header-navbar;
     justify-self: end;
     display: flex;
     justify-content: space-between;
@@ -21,9 +16,9 @@ body {
 .header-navbar > div > a {
     margin-right: 10px;
     text-decoration: none;
-    color: #A13C07;
+    color: var(--header-navbar-color)
 }
 
 .header-navbar > div > a:hover {
-    color:#D97230;
+    color: var(--header-navbar-hover-color);
 }
