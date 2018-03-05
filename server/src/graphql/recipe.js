@@ -1,3 +1,5 @@
+export const name = `Recipe`;
+
 export const schema = `
 type Recipe {
   id: ID!
@@ -8,12 +10,12 @@ type Recipe {
 }
 `;
 
-export const query = `
+export const queries = `
   recipe(id: ID): Recipe
   recipes: [Recipe]
 `;
 
-export const mutation = `
+export const mutations = `
   updateRecipe(id: ID): Recipe
 `;
 
@@ -29,6 +31,4 @@ export const resolvers = {
     author: () => `Author found`,
   },
 };
-
-export const name = `Recipe`;
 
