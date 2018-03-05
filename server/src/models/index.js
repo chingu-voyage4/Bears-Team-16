@@ -1,4 +1,4 @@
-import user from "./user";
-import recipe from "./recipe";
+import User from "./user";
+import Recipe from "./recipe";
 
-export { user, recipe };
+export { User, Recipe };

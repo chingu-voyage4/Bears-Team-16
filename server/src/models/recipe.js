@@ -1,10 +1,12 @@
 import db from '../db';
-import { User } from "../models";
 
-export default db.Model.extend({
+require(`./user`);
+
+export default db.model(`Recipe`, {
   tableName: `recipes`,
   hasTimestamps: true,
   author() {
-    return this.belongTo(User);
+    return this.belongsTo(`User`);
   },
 });
+
