@@ -1,9 +1,11 @@
+import { Recipe } from "../models";
+
 export const name = `Recipe`;
 
 export const schema = `
 type Recipe {
   id: ID!
-  author: String!
+  author: User!
   title: String
   desc: String
   prepTime: Int,
