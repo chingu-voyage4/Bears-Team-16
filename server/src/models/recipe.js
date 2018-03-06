@@ -8,5 +8,8 @@ export default db.model(`Recipe`, {
   author() {
     return this.belongsTo(`User`);
   },
+  favs() {
+    return this.belongsToMany(`User`, `favs`);
+  },
 });
 

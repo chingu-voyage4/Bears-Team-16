@@ -8,7 +8,7 @@ export default db.model(`User`, {
   recipes() {
     return this.hasMany(`Recipe`);
   },
-  favourites() {
+  favs() {
     return this.belongsToMany(`Recipe`, `favs`);
   },
 });
