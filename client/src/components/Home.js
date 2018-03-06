@@ -17,7 +17,7 @@ query {
 const Home = ({ data, loading, error }) => (
   <div>
     <h1>Recipe app</h1>
-    <ul>{!data.loading && data.recipes.map(recipe =>
+    <ul>{!data.loading && !data.error && data.recipes.map(recipe =>
       <li key={recipe.id}>{`${recipe.title} by ${recipe.author.uname}`}</li>)}
     </ul>
   </div>
