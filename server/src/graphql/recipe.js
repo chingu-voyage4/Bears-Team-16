@@ -24,13 +24,15 @@ export const mutations = `
 export const resolvers = {
   Query: {
     recipe: () => ({ id: `I'm a recipe!` }),
-    recipes: () => [ `I'm a recipe`, `Me too!!!` ],
+    async recipes() {
+      return Recipe
+        .forge()
+        .fetchAll({ withRelated: [ `author` ] })
+        .then(list => list.toJSON());
+    },
   },
   Mutation: {
     updateRecipe: id => ({ prop: `updated recipe` }),
   },
-  Recipe: {
-    author: () => `Author found`,
-  },
+  Recipe: {},
 };
-
