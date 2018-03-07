@@ -1,4 +1,4 @@
-# Bearecipes :bear::fork_and_knife: [![Build Status](https://travis-ci.org/chingu-voyage4/Bears-Team-16.svg?branch=development)](https://travis-ci.org/chingu-voyage4/Bears-Team-16)
+# Bite Sized :fork_and_knife: [![Build Status](https://travis-ci.org/chingu-voyage4/Bears-Team-16.svg?branch=development)](https://travis-ci.org/chingu-voyage4/Bears-Team-16)
 
 by Voyage4 Bears16
 
