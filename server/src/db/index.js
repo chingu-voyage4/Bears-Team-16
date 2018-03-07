@@ -1,8 +1,9 @@
-import knex from "knex";
 import dbConfig from "./dbConfig";
 
-const bookshelf = require(`bookshelf`)(knex(dbConfig));
+const knex = require(`knex`)(dbConfig);
 
-bookshelf.plugin(`registry`);
+const db = require(`bookshelf`)(knex);
+db.plugin(`registry`);
 
-module.exports = bookshelf;
+// Export knex for testing migrations
+export { db, knex };
