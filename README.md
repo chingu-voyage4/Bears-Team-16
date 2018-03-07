@@ -21,13 +21,13 @@ Discover, save and share your tastiest recipes.
 ### Environment
 
 * Clone the repository
-* Setup development environment variables in `.env` (Use `.env.example` template)
+* In `server/src/config`, create `dev.js` and `test.js` and set environment variables using `example.js` template
 * `cd server && npm install` to install server packages
 * `cd client && npm install` to install client packages
 
 ### Database
 
-* Setup local [PostgreSQL](https://www.postgresql.org/) database using `.env` file configuration
+* Setup local [PostgreSQL](https://www.postgresql.org/) database(s) using variables from `server/src/config`
 * `npm run db:migrate` to update database migrations
 * `npm run db:rollback` to rollback database migrations
 * `npm run db:seed` to seed the database
@@ -57,8 +57,9 @@ Discover, save and share your tastiest recipes.
 * [Bookshelf](http://bookshelfjs.org/) - SQL ORM
 * [GraphQL](http://graphql.org/learn/) - API query language
 * [React](https://reactjs.org/) - Frontend library
+* [React-Router](https://reacttraining.com/react-router/) - Routing library
 * [TravisCI](https://travis-ci.org) - Continuous Integration service
-* [Mocha](https://mochajs.org/) - Testing framework
+* [Mocha](https://mochajs.org/) and [Jest](https://facebook.github.io/jest/) - Testing frameworks
 * [ESLint](https://eslint.org/) - Code linter
 * [Airbnb](https://github.com/airbnb/javascript) - Development standards guide
 
