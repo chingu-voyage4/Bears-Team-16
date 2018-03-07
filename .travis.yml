@@ -2,7 +2,12 @@ language: "node_js"
 node_js:
   - "lts/*"
   - "9"
+services:
+- postgresql
 env:
   - TEST=server
   - TEST=client
+before_script:
+  - psql -c "CREATE DATABASE recipes_test;" -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" -U postgres
 script: cd $TEST && npm install && npm test
