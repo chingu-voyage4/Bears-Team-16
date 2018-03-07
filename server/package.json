@@ -45,7 +45,7 @@
     "test-e2e":
       "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 --exit",
     "test-integration":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000--exit",
+      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 --exit",
     "test-unit":
       "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
     "tdd": "npm run test-unit -- --watch",
