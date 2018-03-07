@@ -1,4 +1,4 @@
-import db from '../db';
+import { db } from '../db';
 
 require(`./user`);
 
@@ -12,4 +12,3 @@ export default db.model(`Recipe`, {
     return this.belongsToMany(`User`, `favs`);
   },
 });
-
