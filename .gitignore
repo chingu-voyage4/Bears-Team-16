@@ -66,3 +66,7 @@ build
 
 # Misc
 .DS_Store
+.idea
+
+# Yarn lock file
+yarn.lock

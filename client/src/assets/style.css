@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+:root {
+    --main-text-font : Nunito;
+    --header-background-color: #F79751;
+    --header-navbar-color: #A13C07;
+    --header-navbar-hover-color: #D97230;
+}
