@@ -13,7 +13,7 @@ import Home from "./Home";
 
 const App = () => (
     <Router>
-        <div>
+        <div className='test'>
             <Header />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
