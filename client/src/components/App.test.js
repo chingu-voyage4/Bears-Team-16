@@ -1,11 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import enzyme, { shallow } from 'enzyme';
 import App from './App';
+import Adapter from "enzyme-adapter-react-16";
 
-it('sample test', () => {
-    expect(2 + 2).toBe(4);
-})
+enzyme.configure({ adapter: new Adapter() });
 
-it('sample test for enzyme', () => {
-    shallow(<App />);
+
+it(`sample test`, () => {
+  expect(2 + 2).toBe(4);
+});
+
+it(`sample test for enzyme`, () => {
+  shallow(<App />);
 });
