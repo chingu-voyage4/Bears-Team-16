@@ -11,7 +11,7 @@ import Browse from "./layout/Browse";
 import Contact from "./layout/Contact";
 /* AUTH COMPONENTS */
 import Login from "./auth/Login";
-import Signup from "./auth/Signup";
+import Signup from "./auth/Signup/Signup";
 /* OTHER COMPONENTS */
 
 const App = () => (
