@@ -34,7 +34,10 @@ export const resolvers = {
           return model.toJSON();
         });
     },
-    users: () => [ `I'm a user`, `Me too!!!` ],
+    async users() {
+      return User
+        .fetchAll().then(list => list.toJSON());
+    },
   },
   Mutation: {
     updateUser: id => ({ prop: `updated user` }),
