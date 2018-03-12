@@ -2,9 +2,6 @@ import { makeExecutableSchema } from "graphql-tools";
 import * as user from "./user";
 import * as recipe from "./recipe";
 
-console.log(user, recipe);
-
-
 // Parse and merge schemas and resolvers
 const prepareSchema = modules => {
   let schemaQueries = ``;

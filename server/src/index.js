@@ -2,31 +2,26 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import graphqlHTTP from "express-graphql";
+import keys from "./config/keys";
 import schema from './graphql/';
 
-// Application config
-require(`dotenv`).config({ path: `${__dirname}/../../.env` });
-
-const { env } = process;
 export const app = express();
 
+// Config
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan(`dev`));
 app.use(require(`cors`)());
 
-// Route
+// Routes
 app.get(`/`, (req, res) => { res.json(`Howdy`); });
-
-// GraphiQL
 app.use(
   `/graphql`,
   bodyParser.json(),
   graphqlHTTP({
     schema,
-    graphiql: env.NODE_ENV === `development`,
+    graphiql: process.env.NODE_ENV === `development`,
   }),
 );
 
-
-app.listen(env.PORT, () => console.log(`There will be recipes on ${env.HOST}:${env.PORT}.`));
+app.listen(keys.PORT, () => console.log(`There will be ${process.env.NODE_ENV} recipes on ${keys.HOST}:${keys.PORT}.`));
