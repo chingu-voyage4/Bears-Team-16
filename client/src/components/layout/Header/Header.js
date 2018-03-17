@@ -1,21 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import './Header.css'
+import {HeaderStyle, NavBarStyle, NavStyle} from './styles.js'
+import About from './img/About.png'
+import Home from './img/Home.png'
+import Browse from './img/Browse.png'
+import Contact from './img/Contact.png'
 
 const Header = () => (
-    <div className='header-wrapper'>
-        <div className='header-logo'>
-            logo comes here
-        </div>
-        <div className='header-navbar'>
-            <div>
-                <Link to="/login">Login</Link>
-            </div>
-            <div>
-                <Link to="/signup">Signup</Link>
-            </div>
-        </div>
-    </div>
+    <HeaderStyle>
+        <div css={{ gridArea: 'header-logo'}}>logo</div>
+        <NavBarStyle css={{ gridArea: 'header-navbar'}}>
+            <NavStyle>
+                <Link to="/login"><img src={Home}/></Link>
+            </NavStyle>
+            <NavStyle>
+                <Link to="/login"><img src={Browse}/></Link>
+            </NavStyle>
+            <NavStyle>
+                <Link to="/login"><img src={About}/></Link>
+            </NavStyle>
+            <NavStyle>
+                <Link to="/login"><img src={Contact}/></Link>
+            </NavStyle>
+        </NavBarStyle>
+    </HeaderStyle>
 );
 
 export default Header;
