@@ -1,5 +1,4 @@
 import glamorous from 'glamorous';
-import Browse from './img/Browse.png'
 
 export const HeaderStyle = glamorous.div({
     backgroundColor: '#C8E6C9',
