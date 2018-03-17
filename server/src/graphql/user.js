@@ -1,3 +1,5 @@
+import { User } from "../models";
+
 export const name = `User`;
 
 export const schema = `
@@ -6,9 +8,10 @@ type User {
   uname: String
   email: String!
   password: String
-  location: String,
+  location: String
   bio: String
   recipes: [Recipe]
+  favs: [Recipe]
 }`;
 
 export const queries = `
@@ -22,15 +25,23 @@ export const mutations = `
 
 export const resolvers = {
   Query: {
-    user: () => ({
-      id: 2, uname: `Bear`, email: `bear16@mail.com`, password: `12345`, location: `chingu`,
-    }),
-    users: () => [ `I'm a user`, `Me too!!!` ],
+    async user(_, { id: userId }) {
+      return User
+        .where({ id: userId })
+        .fetch({ withRelated: [ `recipes`, `favs` ] })
+        .then(model => {
+          if (!model) return null;
+          return model.toJSON();
+        });
+    },
+    async users() {
+      return User
+        .fetchAll().then(list => list.toJSON());
+    },
   },
   Mutation: {
     updateUser: id => ({ prop: `updated user` }),
   },
   User: {
-    email: () => ({ text: `Here's the email` }),
   },
 };

@@ -1,14 +1,15 @@
-import db from "../db";
-import { Recipe } from "../models";
+import { db } from "../db";
 
-export default db.Model.extend({
+require(`./recipe`);
+
+export default db.model(`User`, {
   tableName: `users`,
   hasTimestamps: true,
   recipes() {
-    return this.hasMany(Recipe);
+    return this.hasMany(`Recipe`);
   },
   favs() {
-    return this.belongsToMany(Recipe, `favs`);
+    return this.belongsToMany(`Recipe`, `favs`);
   },
 });
 
