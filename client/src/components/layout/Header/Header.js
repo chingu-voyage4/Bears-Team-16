@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {HeaderStyle, NavBarStyle, NavStyle} from './styles.js'
+import './Header.css'
+import {HeaderStyle, NavBarStyle, NavStyle, Input, NavItem, SignUpButton} from './styles.js'
 import About from './img/About.png'
 import Home from './img/Home.png'
 import Browse from './img/Browse.png'
@@ -11,17 +12,19 @@ const Header = () => (
         <div css={{ gridArea: 'header-logo'}}>logo</div>
         <NavBarStyle css={{ gridArea: 'header-navbar'}}>
             <NavStyle>
-                <Link to="/login"><img src={Home}/></Link>
+                <Link to="/login"><img src={Home}/><NavItem>HOME</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/login"><img src={Browse}/></Link>
+                <Link to="/browse"><img src={Browse}/><NavItem>BROWSE</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/login"><img src={About}/></Link>
+                <Link to="/about"><img src={About}/><NavItem>ABOUT</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/login"><img src={Contact}/></Link>
+                <Link to="/contact"><img src={Contact}/><NavItem>CONTACT</NavItem></Link>
             </NavStyle>
+            <Input placeholder='Search for recipes..' />
+            <SignUpButton>SIGN IN</SignUpButton>
         </NavBarStyle>
     </HeaderStyle>
 );
