@@ -1,5 +1,11 @@
 {
   "name": "client",
+  "jest": {
+    "transform": {
+      "^.+\\.jsx$": "babel-jest",
+      "^.+\\.js$": "babel-jest"
+    }
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +23,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
+    "babel-jest": "^23.0.0-alpha.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
@@ -30,14 +37,16 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
-    "jest": "^22.4.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.1.4",
     "jest-enzyme": "^5.0.3",
+    "jest-transform-stub": "^1.0.0",
     "prettier": "^1.10.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --coverage",
+    "test": "NODE_ENV=testing jest",
     "eject": "react-scripts eject"
   }
 }
