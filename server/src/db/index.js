@@ -1,8 +1,9 @@
-import knex from "knex";
-import bookshelf from "bookshelf";
 import dbConfig from "./dbConfig";
 
-// TODO register modules centrally to avoid circular imports
-// bookshelf.plugin(`registry`);
+const knex = require(`knex`)(dbConfig);
 
-module.exports = bookshelf(knex(dbConfig));
+const db = require(`bookshelf`)(knex);
+db.plugin(`registry`);
+
+// Export knex for testing migrations
+export { db, knex };

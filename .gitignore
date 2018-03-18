@@ -56,6 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.test
 .env.local
 .env.development.local
 .env.test.local
@@ -70,3 +71,6 @@ build
 
 # Yarn lock file
 yarn.lock
+
+# Config keys
+server/src/config/dev.js
