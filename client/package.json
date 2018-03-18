@@ -1,9 +1,9 @@
 {
   "name": "client",
   "jest": {
-    "transform": {
-      "^.+\\.jsx$": "babel-jest",
-      "^.+\\.js$": "babel-jest"
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
     }
   },
   "version": "0.1.0",
@@ -40,13 +40,14 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.4",
     "jest-enzyme": "^5.0.3",
+    "jest-expo": "^25.1.0",
     "jest-transform-stub": "^1.0.0",
     "prettier": "^1.10.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "NODE_ENV=testing jest",
+    "test": "jest",
     "eject": "react-scripts eject"
   }
 }
