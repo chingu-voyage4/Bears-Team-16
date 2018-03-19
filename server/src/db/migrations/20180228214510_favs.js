@@ -8,6 +8,7 @@ export const up = (knex, Promise) => Promise.all([
       .integer(`user_id`)
       .references(`users.id`)
       .notNullable();
+    table.unique([ `user_id`, `recipe_id` ]);
   }),
 ]);
 
