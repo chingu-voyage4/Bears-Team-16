@@ -9,7 +9,6 @@ export const up = (knex, Promise) =>
         .integer(`category_id`)
         .references(`categories.id`)
         .notNullable();
-      table.unique([ `recipe_id`, `category_id` ]);
     }),
   ]);
 

@@ -14,11 +14,6 @@ export const up = (knex, Promise) =>
         .references(`units.id`)
         .notNullable();
       table.integer(`amount`).notNullable();
-      table.unique([
-        `recipe_id`,
-        `unit_id`,
-        `ingredient_id`,
-      ]);
     }),
   ]);
 
