@@ -24,7 +24,9 @@ module.exports = (app) => {
 
   /* GET user profile. */
   app.get(`/profile`, (req, res, next) => {
+    console.log(req.user);
+  });
+  app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {
     res.send(req.user);
   });
-  app.use(`/user`, passport.authenticate(`jwt`, { session: false }), app.get(`/profile`));
 };
