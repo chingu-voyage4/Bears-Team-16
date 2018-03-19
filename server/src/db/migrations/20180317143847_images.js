@@ -7,7 +7,7 @@ export const up = (knex, Promise) =>
         .references(`recipes.id`)
         .notNullable();
       table
-        .text(`url`)
+        .string(`url`)
         .notNullable()
         .unique();
     }),
