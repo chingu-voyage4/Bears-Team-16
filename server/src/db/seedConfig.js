@@ -38,7 +38,7 @@ export const collTemplates = {
     unit_system: [ `units` ],
   },
   recipes: {
-    author_id: [ `int`, limits.users ],
+    user_id: [ `int`, limits.users ],
     title: [ `string` ],
     description: [ `paragraph` ],
     instructions: [ `paragraph` ],
