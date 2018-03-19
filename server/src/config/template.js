@@ -5,5 +5,6 @@ export default {
   DB_NAME: ``,
   DB_USER: ``,
   DB_PWD: ``,
+  JWT_SECRET: ``,
 };
 

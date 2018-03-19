@@ -5,4 +5,5 @@ export default {
   DB_NAME: `recipes_test`,
   DB_USER: `postgres`,
   DB_PWD: `postgres`,
+  JWT_SECRET: `BeaRecipes16`,
 };
