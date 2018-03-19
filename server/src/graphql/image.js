@@ -6,7 +6,7 @@ export const schema = `
 type Image {
   id: ID!
   url: String!
-  ofRecipe: [Recipe]
+  recipe_id: [Recipe]
 }
 `;
 

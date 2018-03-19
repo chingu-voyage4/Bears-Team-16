@@ -6,7 +6,7 @@ export const schema = `
 type Unit {
   id: ID!
   name: String!
-  unitSystem: String!
+  unit_system: String!
 }
 `;
 

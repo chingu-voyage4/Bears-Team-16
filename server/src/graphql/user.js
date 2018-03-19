@@ -14,7 +14,7 @@ type User {
   avatar: String
   recipes: [Recipe]
   favs: [Recipe]
-  unitSystem: String!
+  unit_system: String!
 }`;
 
 export const queries = `

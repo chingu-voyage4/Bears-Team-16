@@ -9,7 +9,7 @@ export const up = (knex, Promise) => Promise.all([
     table.text(`description`).notNullable();
     table.text(`instructions`).notNullable();
     table.integer(`portions`).notNullable();
-    table.integer(`prep_time`);
+    table.integer(`prep_time`).notNullable();
     table.timestamps();
   }),
 ]);

@@ -9,7 +9,7 @@ type Recipe {
   title: String!
   description: String!
   portions: Int!
-  prepTime: Int!
+  prep_time: Int!
   images: [Image]
   categories: [Category]
 }
