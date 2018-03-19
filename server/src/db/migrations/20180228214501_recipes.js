@@ -2,7 +2,7 @@ export const up = (knex, Promise) => Promise.all([
   knex.schema.createTable(`recipes`, table => {
     table.increments(`id`).primary();
     table
-      .integer(`author_id`)
+      .integer(`user_id`)
       .references(`users.id`)
       .notNullable();
     table.string(`title`).notNullable();
