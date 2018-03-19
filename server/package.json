@@ -9,8 +9,12 @@
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.1",
     "graphql-tools": "^2.21.0",
+    "jsonwebtoken": "^8.2.0",
     "knex": "^0.14.4",
     "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.4.1"
   },
   "devDependencies": {
@@ -43,14 +47,10 @@
     "start": "node ./build/index.js",
     "prestart": "npm run build",
     "dev": "nodemon src/index.js --exec babel-node",
-    "test":
-      "NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill --recursive ./test/ -t 5000 --exit",
-    "test-e2e":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 --exit",
-    "test-integration":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 --exit",
-    "test-unit":
-      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
+    "test": "NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill --recursive ./test/ -t 5000 --exit",
+    "test-e2e": "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 --exit",
+    "test-integration": "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 --exit",
+    "test-unit": "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
     "tdd": "npm run test-unit -- --watch",
     "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
     "db-migrate": "npm run knex migrate:latest",
