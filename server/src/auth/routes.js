@@ -1,7 +1,8 @@
-const jwt = require(`jsonwebtoken`);
-const passport = require(`passport`);
+import jwt from "jsonwebtoken";
+import passport from "passport";
+import keys from "../config/keys";
 
-module.exports = (app) => {
+module.exports = app => {
   app.post(`/login`, (req, res, next) => {
     passport.authenticate(`local`, { session: false }, (err, user, info) => {
       if (err || !user) {
@@ -14,18 +15,14 @@ module.exports = (app) => {
         if (err) {
           res.send(err);
         }
-        // generate a signed son web token with the
+        // generate a signed jwt with the
         // contents of user object and return it in the response
-        const token = jwt.sign(user, `your_jwt_secret`);
+        const token = jwt.sign(user, keys.JWT_SECRET);
         return res.json({ user, token });
       });
     })(req, res);
   });
 
-  /* GET user profile. */
-  app.get(`/profile`, (req, res, next) => {
-    console.log(req.user);
-  });
   app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {
     res.send(req.user);
   });

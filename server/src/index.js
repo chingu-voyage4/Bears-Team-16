@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import graphqlHTTP from "express-graphql";
-import passport from 'passport';
 import keys from "./config/keys";
 import schema from './graphql/';
 

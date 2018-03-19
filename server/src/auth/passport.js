@@ -1,31 +1,33 @@
-import { User } from '../models';
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import passportJWT, { Strategy as JWTStrategy } from "passport-jwt";
+import { User } from "../models";
+import keys from "../config/keys";
 
-const passport = require(`passport`);
-const LocalStrategy = require(`passport-local`).Strategy;
-
-const passportJWT = require(`passport-jwt`);
-
-const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(new LocalStrategy({
   usernameField: `email`,
   passwordField: `password`,
-}, ((email, password, cb) => User.fetch({ email, password })
+}, ((email, password, cb) => {
+    console.log(email, password);
+
     // TODO: check what it returns from bookshelf of not an object
-    .then(user => {
-      if (!user) {
-        return cb(null, false, { message: `Incorrect email or password` });
-      }
-      return cb(null, user, { message: `Logged in successfully` });
-    })
-    .catch(err => cb(err)))));
+    return User.where({ email, password }).fetch()
+      .then(user => {
+        if (!user) {
+          return cb(null, false, { message: `Incorrect email or password` });
+        }
+        return cb(null, user.toJSON(), { message: `Logged in successfully` });
+      })
+      .catch(err => cb(err));
+  })));
 
 
 passport.use(new JWTStrategy(
   {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: `your_jwt_secret`,
+    secretOrKey: keys.JWT_SECRET,
   },
   ((jwtPayload, cb) =>
 
