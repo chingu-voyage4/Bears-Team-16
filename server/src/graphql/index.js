@@ -1,6 +1,11 @@
 import { makeExecutableSchema } from "graphql-tools";
 import * as user from "./user";
 import * as recipe from "./recipe";
+import * as image from "./image";
+import * as category from "./category";
+import * as unit from "./unit";
+import * as ingredient from "./ingredient";
+import * as log from "./log";
 
 // Parse and merge schemas and resolvers
 const prepareSchema = modules => {
@@ -41,4 +46,12 @@ const prepareSchema = modules => {
   return { typeDefs, resolvers };
 };
 
-export default makeExecutableSchema(prepareSchema([ user, recipe ]));
+export default makeExecutableSchema(prepareSchema([
+  user,
+  recipe,
+  image,
+  category,
+  unit,
+  ingredient,
+  log,
+]));
