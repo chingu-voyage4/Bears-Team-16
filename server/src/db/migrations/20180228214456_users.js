@@ -5,7 +5,7 @@ export const up = (knex, Promise) => Promise.all([
       .string(`email`)
       .notNullable()
       .unique();
-    table.text(`password`).notNullable();
+    table.string(`password`).notNullable();
     table
       .string(`fname`)
       .notNullable()
@@ -17,7 +17,7 @@ export const up = (knex, Promise) => Promise.all([
     table
       .enu(`unit_system`, [ `metric`, `imperial` ])
       .defaultTo(`metric`);
-    table.text(`avatar`);
+    table.string(`avatar`);
     table.text(`bio`);
     table.string(`location`);
     table.timestamps();
