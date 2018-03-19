@@ -18,7 +18,7 @@ export const limits = {
  * Value arrays represent arguments for the generator helper function
  * [fieldName(string), params(object), unique(bool)]
  */
-export const templates = {
+export const collTemplates = {
   users: {
     email: [
       `email`,
@@ -71,5 +71,22 @@ export const templates = {
       null,
       true,
     ],
+  },
+};
+
+export const joinTemplates = {
+  favs: {
+    user_id: [ `int`, limits.users ],
+    recipe_id: [ `int`, limits.recipes ],
+  },
+  recipe_categories: {
+    category_id: [ `int`, limits.categories ],
+    recipe_id: [ `int`, limits.recipes ],
+  },
+  recipe_ingredients: {
+    ingredient_id: [ `int`, limits.ingredients ],
+    recipe_id: [ `int`, limits.recipes ],
+    unit_id: [ `int`, limits.units ],
+    amount: [ `int`, 500 ],
   },
 };
