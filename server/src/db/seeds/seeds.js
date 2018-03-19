@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { templates, limits } from "../seedConfig";
+import { collTemplates, joinTemplates, limits } from "../seedConfig";
 import { genTbl } from "../../utils/seedGenerator";
 
+// TODO loop promises
 export const seed = (knex, Promise) =>
   knex(`users`).del()
     .then(() => knex(`recipes`).del())
@@ -14,17 +15,23 @@ export const seed = (knex, Promise) =>
     .then(() => knex(`recipe_categories`).del())
     .then(() => knex(`recipe_ingredients`).del())
     .then(() =>
-      knex(`users`).insert(genTbl(templates.users)(limits.users)))
+      knex(`users`).insert(genTbl(collTemplates.users)(limits.users)))
     .then(() =>
-      knex(`recipes`).insert(genTbl(templates.recipes)(limits.recipes)))
+      knex(`recipes`).insert(genTbl(collTemplates.recipes)(limits.recipes)))
     .then(() =>
-      knex(`images`).insert(genTbl(templates.images)(limits.images)))
+      knex(`images`).insert(genTbl(collTemplates.images)(limits.images)))
     .then(() =>
-      knex(`categories`).insert(genTbl(templates.categories)(limits.categories)))
+      knex(`categories`).insert(genTbl(collTemplates.categories)(limits.categories)))
     .then(() =>
-      knex(`units`).insert(genTbl(templates.units)(limits.units)))
+      knex(`units`).insert(genTbl(collTemplates.units)(limits.units)))
     .then(() =>
-      knex(`ingredients`).insert(genTbl(templates.ingredients)(limits.ingredients)))
+      knex(`ingredients`).insert(genTbl(collTemplates.ingredients)(limits.ingredients)))
     .then(() =>
-      knex(`logs`).insert(genTbl(templates.logs)(limits.logs)));
+      knex(`logs`).insert(genTbl(collTemplates.logs)(limits.logs)))
+    .then(() =>
+      knex(`favs`).insert(genTbl(joinTemplates.favs)(limits.favs)))
+    .then(() =>
+      knex(`recipe_categories`).insert(genTbl(joinTemplates.recipe_categories)(limits.recipe_categories)))
+    .then(() =>
+      knex(`recipe_ingredients`).insert(genTbl(joinTemplates.recipe_ingredients)(limits.recipe_ingredients)));
 
