@@ -7,7 +7,7 @@ import Header from "./layout/Header/Header";
 import Footer from "./layout/Footer/Footer";
 /* AUTH COMPONENTS */
 import Login from "./auth/Login";
-import Signup from "./auth/Signup";
+import Signup from "./auth/Signup/Signup";
 /* OTHER COMPONENTS */
 import Home from "./Home";
 
