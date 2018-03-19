@@ -6,9 +6,10 @@ export const up = (knex, Promise) => Promise.all([
       .references(`users.id`)
       .notNullable();
     table.string(`title`).notNullable();
-    table.text(`desc`).notNullable();
-    table.integer(`prep_time`);
-    table.string(`category`);
+    table.text(`description`).notNullable();
+    table.text(`instructions`).notNullable();
+    table.integer(`portions`).notNullable();
+    table.integer(`prep_time`).notNullable();
     table.timestamps();
   }),
 ]);

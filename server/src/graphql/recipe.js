@@ -7,8 +7,11 @@ type Recipe {
   id: ID!
   author: User!
   title: String!
-  desc: String!
-  prepTime: Int!
+  description: String!
+  portions: Int!
+  prep_time: Int!
+  images: [Image]
+  categories: [Category]
 }
 input RecipeInput {
   author: Int!
@@ -19,8 +22,7 @@ input RecipeInput {
 `;
 
 export const queries = `
-  recipe(id: ID): Recipe
-  recipes: [Recipe]
+  recipes(id: ID): [Recipe]
 `;
 
 export const mutations = `
@@ -30,11 +32,16 @@ export const mutations = `
 
 export const resolvers = {
   Query: {
-    recipe: () => ({ id: `I'm a recipe!` }),
-    async recipes() {
+    async recipes(_, { id: recipeId }) {
+      if (recipeId) {
+        return Recipe
+          .where({ id: recipeId })
+          .fetch({ withRelated: [ `author`, `images` ] })
+          .then(data => data.toJSON());
+      }
       return Recipe
-        .fetchAll({ withRelated: [ `author` ] })
-        .then(list => list.toJSON());
+        .fetchAll({ withRelated: [ `author`, `images` ] })
+        .then(data => data.toJSON());
     },
   },
   Mutation: {
@@ -42,7 +49,7 @@ export const resolvers = {
       const vals = {
         title: input.title,
         desc: input.desc,
-        user_id: input.author,
+        author: input.author,
         prep_time: input.prepTime,
       };
 
