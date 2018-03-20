@@ -46,6 +46,7 @@ export const resolvers = {
   },
   Mutation: {
     async createRecipe(_, { input }) {
+      // FIXME
       const vals = {
         title: input.title,
         desc: input.desc,

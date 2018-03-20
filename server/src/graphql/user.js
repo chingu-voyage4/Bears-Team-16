@@ -6,7 +6,7 @@ export const schema = `
 type User {
   id: ID!
   email: String!
-  password: String
+  password: String!
   fname: String!
   lname: String!
   bio: String
@@ -15,7 +15,16 @@ type User {
   recipes: [Recipe]
   favs: [Recipe]
   unit_system: String!
-}`;
+}
+input UserInput {
+  email: String!
+  password: String!
+  fname: String!
+  lname: String!
+  bio: String
+  location: String
+}
+`;
 
 export const queries = `
   user(id: ID): User
@@ -23,14 +32,14 @@ export const queries = `
 `;
 
 export const mutations = `
-  updateUser(id: ID): User
+  createUser(input: UserInput): User
+
 `;
 
 export const resolvers = {
   Query: {
     async user(_, { id: userId }) {
-      return User
-        .where({ id: userId })
+      return User.where({ id: userId })
         .fetch({ withRelated: [ `recipes`, `favs` ] })
         .then(model => {
           if (!model) return null;
@@ -38,13 +47,17 @@ export const resolvers = {
         });
     },
     async users() {
-      return User
-        .fetchAll().then(list => list.toJSON());
+      return User.fetchAll().then(list => list.toJSON());
     },
   },
   Mutation: {
-    updateUser: id => ({ prop: `updated user` }),
+    // TODO test me
+    async createUser(_, { input }) {
+      return User.forge()
+        .save(input)
+        .then(model => model.fetch())
+        .then(model => model.toJSON());
+    },
   },
-  User: {
-  },
+  User: {},
 };
