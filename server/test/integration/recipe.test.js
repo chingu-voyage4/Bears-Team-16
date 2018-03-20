@@ -13,6 +13,7 @@ const { expect } = chai;
 const recipes = schema.getType(`Query`).getFields().recipes.resolve;
 
 describe(`Recipe`, () => {
+  before(async () => reseed());
   describe(`query:recipes`, () => {
     it(`without params, returns an array of recipes with correct fields`, () =>
       recipes(null, {}).then(data => {
@@ -29,14 +30,4 @@ describe(`Recipe`, () => {
         });
       }));
   });
-
-  // describe(`query:recipes`, () => {
-  //   // reseed before each test
-  //   reseed();
-
-  //   it(`returns an array`, () =>
-  //     Query.recipes.resolve().then(data => {
-  //       expect(data).to.be.an(`array`);
-  //     }));
-  // });
 });
