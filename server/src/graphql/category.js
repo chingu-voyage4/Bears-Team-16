@@ -14,7 +14,7 @@ input CategoryInput {
 `;
 
 export const queries = `
-  getCategories: [Category]
+  categories: [Category]
 `;
 
 export const mutations = `
@@ -23,7 +23,7 @@ export const mutations = `
 
 export const resolvers = {
   Query: {
-    getCategories: () => Category.fetchAll()
+    categories: () => Category.fetchAll()
       .then(data => data && data.toJSON()),
   },
   Mutation: {

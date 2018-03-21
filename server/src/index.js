@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import cors from "cors";
 import graphqlHTTP from "express-graphql";
 import keys from "./config/keys";
 import schema from './graphql/';
@@ -24,6 +25,7 @@ require(`./auth/routes`)(app);
 
 app.use(
   `/graphql`,
+  cors(),
   bodyParser.json(),
   graphqlHTTP({
     schema,
