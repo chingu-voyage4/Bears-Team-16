@@ -13,6 +13,13 @@ export const reseed = async () => {
 };
 
 export const request = async req => {
-  const res = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
-  return res.data.data;
+  try {
+    const res = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
+    return res.data.data;
+  } catch (err) {
+    return {
+      message: err.response.data.errors[0].message,
+      status: err.response.status,
+    };
+  }
 };
