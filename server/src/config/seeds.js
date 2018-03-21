@@ -13,7 +13,6 @@ export const limits = {
   recipe_ingredients: 60,
 };
 
-
 /**
  * Value arrays represent arguments for the generator helper function
  * [fieldName(string), params(object), unique(bool)]

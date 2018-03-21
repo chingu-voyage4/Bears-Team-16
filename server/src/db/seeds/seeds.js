@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { collTemplates, joinTemplates, limits } from "../seedConfig";
-import { genTbl } from "../../utils/seedGenerator";
+import { collTemplates, joinTemplates, limits } from "../../config/seeds";
+import { genTbl, genJoin } from "../../utils/seedGenerator";
 
 // TODO loop promises
 export const seed = (knex, Promise) =>
@@ -29,9 +29,9 @@ export const seed = (knex, Promise) =>
     .then(() =>
       knex(`logs`).insert(genTbl(collTemplates.logs)(limits.logs)))
     .then(() =>
-      knex(`favs`).insert(genTbl(joinTemplates.favs)(limits.favs)))
+      knex(`favs`).insert(genJoin(joinTemplates.favs)(limits.favs)))
     .then(() =>
-      knex(`recipe_categories`).insert(genTbl(joinTemplates.recipe_categories)(limits.recipe_categories)))
+      knex(`recipe_categories`).insert(genJoin(joinTemplates.recipe_categories)(limits.recipe_categories)))
     .then(() =>
-      knex(`recipe_ingredients`).insert(genTbl(joinTemplates.recipe_ingredients)(limits.recipe_ingredients)));
+      knex(`recipe_ingredients`).insert(genJoin(joinTemplates.recipe_ingredients)(limits.recipe_ingredients)));
 
