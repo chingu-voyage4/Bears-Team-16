@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import chai, { expect } from "chai";
+import chai from "chai";
 import { reseed, request } from "../helpers";
 import { limits } from "../../src/config/seeds";
 

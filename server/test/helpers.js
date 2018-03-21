@@ -15,10 +15,10 @@ export const reseed = async () => {
 export const request = async (req) => {
   try {
     const { data } = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
-    if (!data.errors) {
-      return data.data;
+    if (data.errors) {
+      console.log(data.errors[0]);
     }
-    console.log(data.errors[0]);
+    return data.data;
   } catch (err) {
     const {
       status,
