@@ -36,6 +36,7 @@ export const collTemplates = {
     location: [ `country` ],
     avatar: [ `avatar`, true ],
     unit_system: [ `units` ],
+    portions: [ `int`, 24 ],
   },
   recipes: {
     user_id: [ `int`, limits.users ],
@@ -43,7 +44,6 @@ export const collTemplates = {
     description: [ `paragraph` ],
     instructions: [ `paragraph` ],
     prep_time: [ `int`, 600 ],
-    portions: [ `int`, 24 ],
   },
   categories: {
     name: [
