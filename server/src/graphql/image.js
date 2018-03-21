@@ -9,7 +9,7 @@ type Image {
   recipe_id: [Recipe]
 }
 input ImageInput {
-  name: String!
+  url: String!
   recipe_id: Int!
 }
 `;

@@ -10,7 +10,7 @@ describe(`errors`, () => {
   describe(`queries`, () => {
     before(reseed); // Seed once before all queries
 
-    it(`has status 400 is passed queried with nonexistant field`, async () => {
+    it(`fails with status 400 if queried with nonexistant field`, async () => {
       const { message, status } = await request({
         query: `
         {
@@ -20,7 +20,6 @@ describe(`errors`, () => {
         }
         `,
       });
-
       expect(status).to.equal(400);
       expect(message)
         .to.have.string(`Cannot query field`)

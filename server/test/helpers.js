@@ -14,12 +14,18 @@ export const reseed = async () => {
 
 export const request = async (req) => {
   try {
-    const res = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
-    return res.data.data;
+    const { data } = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
+    if (!data.errors) {
+      return data.data;
+    }
+    console.log(data.errors[0]);
   } catch (err) {
-    return {
-      message: err.response.data.errors[0].message,
-      status: err.response.status,
-    };
+    const {
+      status,
+      data: { errors: [ { message } ] }, // blink blink
+    } = err.response;
+
+    console.log(message, status);
+    return { message, status };
   }
 };

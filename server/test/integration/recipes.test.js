@@ -47,11 +47,12 @@ describe(`recipes`, () => {
     });
   });
 
-  describe.only(`mutations`, () => {
+  describe(`mutations`, () => {
     beforeEach(reseed);
 
     it(`can create a record`, async () => {
       const { createRecipe } = await request({
+        // Check for relations
         query: `
           mutation Mutation($newRecipe: RecipeInput) {
             createRecipe(input: $newRecipe) {
@@ -73,9 +74,10 @@ describe(`recipes`, () => {
 
 
       });
-      expect(createRecipe).not.to.be.a(`undefined`);
-      createRecipe
-        .should.have.property(`id`, (limits.recipes + 1).toString());
+      createRecipe.should.deep.include({
+        id: (limits.recipes + 1).toString(),
+        title: `my new recipe`,
+      });
     });
   });
 });

@@ -6,6 +6,30 @@ import { limits } from "../../src/config/seeds";
 chai.should();
 chai.use(require(`chai-things`));
 
-// TODO
-// describe(`ingredients`, () => {
-// });
+describe(`ingredients`, () => {
+  describe(`mutations`, () => {
+    beforeEach(reseed);
+
+    it(`can create a record`, async () => {
+      const { createIngredient } = await request({
+        // TODO check for relateions
+        query: `
+          mutation Mutation($newIngredient: IngredientInput) {
+            createIngredient(input: $newIngredient) {
+              id
+              name
+            }
+          }`,
+        variables: `{
+          "newIngredient": {
+            "name":"my new Ingredient"
+          }
+        }`,
+      });
+      createIngredient.should.deep.include({
+        id: (limits.ingredients + 1).toString(),
+        name: `my new Ingredient`,
+      });
+    });
+  });
+});
