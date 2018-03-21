@@ -12,7 +12,7 @@ export const reseed = async () => {
   await knex.seed.run();
 };
 
-export const request = async req => {
+export const request = async (req) => {
   try {
     const res = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
     return res.data.data;
