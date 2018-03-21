@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import { knex } from "../src/db";
 import axios from "axios";
+import { knex } from "../src/db";
 import keys from "../src/config/keys";
 
 // Start server
