@@ -8,22 +8,25 @@ type Image {
   url: String!
   recipe_id: [Recipe]
 }
+input ImageInput {
+  name: String!
+  recipe_id: Int!
+}
 `;
 
 export const queries = `
-  images(id: ID): [Image]
 `;
 
 export const mutations = `
-  addImage: Image
+  createImage(input: ImageInput): Image
 `;
 
 export const resolvers = {
-  Query: {
-    images: () => [ `liuh`, `IUho` ],
-  },
+  Query: { },
   Mutation: {
-    addImage: () => `Image added!`,
+    createImage: (_, { input }) => Image.forge().save(input)
+      .then(model => model.fetch())
+      .then(model => model.toJSON()),
   },
   Image: {},
 };

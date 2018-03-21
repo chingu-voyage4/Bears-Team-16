@@ -19,6 +19,11 @@ type User {
 input UserInput {
   email: String!
   password: String!
+  fname: String
+  lname: String
+  bio: String
+  location: String
+  unit_system: String
 }
 `;
 
@@ -48,14 +53,10 @@ export const resolvers = {
   },
   Mutation: { // TODO test me
     createUser: (_, { input }) =>
-    // FIXME must be a better way
-      // const vals = { ...input, user_id: input.author };
-      // delete vals.author;
       User.forge()
         .save(input)
         .then(model => model.fetch())
-        .then(model => model.toJSON())
-    ,
+        .then(model => model.toJSON()),
   },
   User: {},
 };

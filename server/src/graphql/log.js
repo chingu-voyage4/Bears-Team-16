@@ -7,17 +7,23 @@ type Log {
   id: ID!
   description: String!
 }
+input LogInput {
+  description: String!
+}
 `;
 
 export const queries = `
-  logs(id: ID): [Log]
 `;
 
 export const mutations = `
+  createLog(input: LogInput): Log
 `;
 
 export const resolvers = {
   Query: {},
-  Mutation: {},
+  Mutation: {
+    createLog: (_, { input }) => Log.forge().save(input)
+      .then(model => model.fetch()).then(model => model.toJSON()),
+  },
   Log: {},
 };
