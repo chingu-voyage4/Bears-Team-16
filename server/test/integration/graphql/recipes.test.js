@@ -17,6 +17,9 @@ describe(`recipes`, () => {
           recipes {
             id
             title
+            images {
+              url
+            }
           }
         }
         `,
@@ -25,25 +28,52 @@ describe(`recipes`, () => {
       recipes
         .should.be.an(`array`)
         .that.has.length(limits.recipes)
-        .and.all.include.keys([ `title`, `id` ])
+        .and.all.include.keys([
+          `title`,
+          `id`,
+          `images`,
+        ])
         .but.all.not.include.keys([ `description` ]);
+
+      recipes.every(r =>
+        r.images.every(i =>
+          !!i.url || i.length === 0)).should.be.true;
     });
 
-    it(`can query single recipe by id`, async () => {
+    it(`can query single recipe with related records by id`, async () => {
       const { recipe } = await request({
         query: `
         {
           recipe(id: 5) {
             id
             title
+            categories {
+              name
+            }
+            images {
+              url
+            }
           }
         }
         `,
       });
       expect(recipe).not.to.be.a(`undefined`);
       recipe.should.be.an(`object`)
-        .that.includes.keys([ `id`, `title` ])
+        .that.includes.keys([
+          `id`,
+          `title`,
+          `categories`,
+          `images`,
+        ])
         .and.has.property(`id`, `5`);
+
+      recipe.images.should.be.an(`array`)
+        .that.all.have.key(`url`)
+        .and.that.has.length.below(limits.images);
+
+      recipe.categories.should.be.an(`array`)
+        .that.all.have.key(`name`)
+        .and.that.has.length.below(limits.categories);
     });
   });
 
