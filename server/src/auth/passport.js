@@ -9,19 +9,17 @@ const ExtractJWT = passportJWT.ExtractJwt;
 passport.use(new LocalStrategy({
   usernameField: `email`,
   passwordField: `password`,
-}, ((email, password, cb) => {
-    console.log(email, password);
-
+}, ((email, password, cb) =>
     // TODO: check what it returns from bookshelf of not an object
-    return User.where({ email, password }).fetch()
+    User.where({ email, password }).fetch()
       .then(user => {
         if (!user) {
           return cb(null, false, { message: `Incorrect email or password` });
         }
         return cb(null, user.toJSON(), { message: `Logged in successfully` });
       })
-      .catch(err => cb(err));
-  })));
+      .catch(err => cb(err))
+  )));
 
 
 passport.use(new JWTStrategy(
