@@ -47,6 +47,9 @@ describe(`recipes`, () => {
           recipe(id: 5) {
             id
             title
+            author {
+              fname
+            }
             categories {
               name
             }
@@ -57,6 +60,7 @@ describe(`recipes`, () => {
         }
         `,
       });
+
       expect(recipe).not.to.be.a(`undefined`);
       recipe.should.be.an(`object`)
         .that.includes.keys([
@@ -64,8 +68,11 @@ describe(`recipes`, () => {
           `title`,
           `categories`,
           `images`,
+          `author`,
         ])
         .and.has.property(`id`, `5`);
+
+      recipe.author.should.not.be.an(`null`);
 
       recipe.images.should.be.an(`array`)
         .that.all.have.key(`url`)

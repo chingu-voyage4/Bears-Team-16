@@ -24,7 +24,7 @@ describe(`users`, () => {
 
       users.should.be
         .an(`array`)
-        .that.has.length(limits.users)
+        .that.has.length(limits.users + 1)
         .and.all.include.keys([ `id`, `fname` ])
         .but.all.not.include.keys([ `location` ]);
     });

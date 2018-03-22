@@ -7,6 +7,8 @@ class TestLogin extends Component {
     this.state = {
       token: null,
     };
+
+    this.auth = this.auth.bind(this);
   }
 
   componentWillMount() {
@@ -14,7 +16,7 @@ class TestLogin extends Component {
     this.setState({ token });
   }
 
-  auth = async () => {
+  async auth() {
     const auth = this.state.token;
     if (auth) {
       console.log(`Logging out...`);
@@ -23,9 +25,9 @@ class TestLogin extends Component {
     } else {
       console.log(`Logging in...`);
       const { data } = await api.post(`/login`, {
-        // Set credentials from your seeded database
-        email: `ok@roizvav.tt`,
-        password: `hIZmGCd#`,
+        // Reseed database OR use credentials from your seeds
+        email: `mail@mail.com`,
+        password: `12354`,
       });
 
       // If valid user returned
@@ -38,27 +40,16 @@ class TestLogin extends Component {
       }
     }
   }
+
   render() {
-    // return (
-    //   this.state.token
-    //     ?
-    //       <div>
-    //     yah
-    //         <button onClick={this.logout}>Logout</button>
-    //       </div>
-
-    //     :
-    //       <div>
-    //     nah
-    //       </div>
-    // );
-
     const auth = !!this.state.token;
     console.log(this.state.token);
 
     return (
-      <button onClick={this.auth}>{auth ? `Logout` : `Login`}</button>
-
+      <div>
+        <h3>{auth ? `Token found` : `No token found`}</h3>
+        <button onClick={this.auth}>{auth ? `Logout` : `Login`}</button>
+      </div>
     );
   }
 }

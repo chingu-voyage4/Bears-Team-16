@@ -34,10 +34,20 @@ export const mutations = `
 export const resolvers = {
   Query: {
     recipes: () => Recipe.fetchAll({
-      withRelated: [ `images`, `categories` ],
+      withRelated: [
+        `images`,
+        `categories`,
+        `author`,
+      ],
     }).then(data => data && data.toJSON()),
     recipe: (_, filter) => Recipe.where(filter)
-      .fetch({ withRelated: [ `images`, `categories` ] })
+      .fetch({
+        withRelated: [
+          `images`,
+          `categories`,
+          `author`,
+        ],
+      })
       .then(data => data && data.toJSON()),
   },
   Mutation: {
