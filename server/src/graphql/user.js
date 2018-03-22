@@ -39,17 +39,11 @@ export const mutations = `
 
 export const resolvers = {
   Query: {
-    async user(_, { id: userId }) {
-      return User.where({ id: userId })
-        .fetch({ withRelated: [ `recipes`, `favs` ] })
-        .then(model => {
-          if (!model) return null;
-          return model.toJSON();
-        });
-    },
-    async users() {
-      return User.fetchAll().then(list => list.toJSON());
-    },
+    users: () => User.fetchAll()
+      .then(data => data && data.toJSON()),
+    user: async (_, filter) => User
+      .where(filter).fetch({ withRelated: [ `recipes`, `favs` ] })
+      .then(data => data && data.toJSON()),
   },
   Mutation: { // TODO test me
     createUser: (_, { input }) =>
