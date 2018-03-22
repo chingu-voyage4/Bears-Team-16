@@ -8,11 +8,9 @@ export const up = (knex, Promise) => Promise.all([
     table.string(`password`).notNullable();
     table
       .string(`fname`)
-      .notNullable()
       .unique();
     table
       .string(`lname`)
-      .notNullable()
       .unique();
     table
       .enu(`unit_system`, [ `metric`, `imperial` ])

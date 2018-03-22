@@ -7,22 +7,18 @@ type User {
   id: ID!
   email: String!
   password: String!
-  fname: String!
-  lname: String!
+  fname: String
+  lname: String
   bio: String
   location: String
   avatar: String
   recipes: [Recipe]
   favs: [Recipe]
-  unit_system: String!
+  unit_system: String
 }
 input UserInput {
   email: String!
   password: String!
-  fname: String!
-  lname: String!
-  bio: String
-  location: String
 }
 `;
 
@@ -50,14 +46,16 @@ export const resolvers = {
       return User.fetchAll().then(list => list.toJSON());
     },
   },
-  Mutation: {
-    // TODO test me
-    async createUser(_, { input }) {
-      return User.forge()
+  Mutation: { // TODO test me
+    createUser: (_, { input }) =>
+    // FIXME must be a better way
+      // const vals = { ...input, user_id: input.author };
+      // delete vals.author;
+      User.forge()
         .save(input)
         .then(model => model.fetch())
-        .then(model => model.toJSON());
-    },
+        .then(model => model.toJSON())
+    ,
   },
   User: {},
 };
