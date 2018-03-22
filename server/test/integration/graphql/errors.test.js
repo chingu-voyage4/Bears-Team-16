@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import chai, { expect } from "chai";
-import { reseed, request } from "../helpers";
+import { reseed, request } from "../../helpers";
 
 chai.should();
 chai.use(require(`chai-things`));
