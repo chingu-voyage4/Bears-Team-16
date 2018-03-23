@@ -6,15 +6,14 @@ import keys from "../src/config/keys";
 // Start server
 require(`../src`);
 
-export const reseed = async () => {
-  await knex.migrate.rollback();
-  await knex.migrate.latest();
-  await knex.seed.run();
-};
+const api = axios.create({
+  baseURL: `http://localhost:${keys.PORT}`,
+  timeout: 2000,
+});
 
 export const request = async (req) => {
   try {
-    const { data } = await axios.post(`http://localhost:${keys.PORT}/graphql`, req);
+    const { data } = await api.post(`/graphql`, req);
     if (data.errors) {
       console.log(data.errors[0]);
     }
@@ -24,8 +23,29 @@ export const request = async (req) => {
       status,
       data: { errors: [ { message } ] }, // blink blink
     } = err.response;
-
-    console.log(message, status);
     return { message, status };
   }
+};
+
+export const login = async credentials => {
+  try {
+    const { data } = await api.post(`/login`, credentials);
+    return data;
+  } catch (err) {
+    const {
+      response: { data: { message } },
+      response: { status },
+    } = err;
+    return { message, status };
+  }
+};
+
+export const reseed = async () => {
+  await knex.migrate.rollback();
+  await knex.migrate.latest();
+  await knex.seed.run();
+};
+
+export const rollback = async () => {
+  await knex.migrate.rollback();
 };

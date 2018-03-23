@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import chai from "chai";
-import { reseed, request } from "../../helpers";
+import { reseed, rollback, request } from "../../helpers";
 import { limits } from "../../../src/config/seeds";
 
 chai.should();
@@ -9,6 +9,7 @@ chai.use(require(`chai-things`));
 describe(`logs`, () => {
   describe(`mutations`, () => {
     beforeEach(reseed);
+    afterEach(rollback);
 
     it(`can create a record`, async () => {
       const { createLog } = await request({
