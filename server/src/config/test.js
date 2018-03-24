@@ -1,5 +1,5 @@
 export default {
-  PORT: 4000,
+  PORT: 4001,
   HOST: `localhost`,
   DB_HOST: `127.0.0.1`,
   DB_NAME: `recipes_test`,

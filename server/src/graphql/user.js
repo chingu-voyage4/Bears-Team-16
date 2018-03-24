@@ -5,13 +5,16 @@ export const name = `User`;
 export const schema = `
 type User {
   id: ID!
-  uname: String
   email: String!
   password: String
-  location: String
+  fname: String!
+  lname: String!
   bio: String
+  location: String
+  avatar: String
   recipes: [Recipe]
   favs: [Recipe]
+  unit_system: String!
 }`;
 
 export const queries = `
