@@ -12,16 +12,16 @@ const Header = () => (
         <div css={{ gridArea: 'header-logo'}}>logo</div>
         <NavBarStyle css={{ gridArea: 'header-navbar'}}>
             <NavStyle>
-                <Link to="/login"><img src={Home}/><NavItem>HOME</NavItem></Link>
+                <Link to="/login" style={{ textDecoration: 'none'}}><img src={Home}/><NavItem>HOME</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/browse"><img src={Browse}/><NavItem>BROWSE</NavItem></Link>
+                <Link to="/browse" style={{ textDecoration: 'none'}}><img src={Browse}/><NavItem>BROWSE</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/about"><img src={About}/><NavItem>ABOUT</NavItem></Link>
+                <Link to="/about" style={{ textDecoration: 'none'}}><img src={About}/><NavItem>ABOUT</NavItem></Link>
             </NavStyle>
             <NavStyle>
-                <Link to="/contact"><img src={Contact}/><NavItem>CONTACT</NavItem></Link>
+                <Link to="/contact" style={{ textDecoration: 'none'}}><img src={Contact}/><NavItem>CONTACT</NavItem></Link>
             </NavStyle>
             <Input placeholder='Search for recipes..' />
             <SignUpButton>SIGN IN</SignUpButton>
