@@ -1,10 +1,10 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import passportJWT, { Strategy as JWTStrategy } from "passport-jwt";
+// import passportJWT, { Strategy as JWTStrategy } from "passport-jwt";
 import { User } from "../models";
-import keys from "../config/keys";
+// import keys from "../config/keys";
 
-const ExtractJWT = passportJWT.ExtractJwt;
+// const ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(new LocalStrategy({
   usernameField: `email`,
@@ -22,19 +22,24 @@ passport.use(new LocalStrategy({
   )));
 
 
-passport.use(new JWTStrategy(
-  {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: keys.JWT_SECRET,
-  },
-  ((jwtPayload, cb) =>
+// passport.use(new JWTStrategy(
+//   {
+//     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+//     secretOrKey: keys.JWT_SECRET,
+//   },
+//   ((jwtPayload, cb) =>
 
-  // find the user in db if needed.
-  // This functionality may be omitted if you store everything you'll need in JWT payload.
-    User
-      .where({ id: jwtPayload })
-      .fetch()
-      .then(user => cb(null, user))
-      .catch(err => cb(err))
-  ),
-));
+//   // find the user in db if needed.
+//   // This functionality may be omitted if you store everything you'll need in JWT payload.
+//   {
+//     console.log(`I'M HEREEEE`);
+//     console.log(ExtractJWT.fromAuthHeaderAsBearerToken());
+//     cb();
+//   }
+//   // User
+//   //   .where({ id: jwtPayload })
+//   //   .fetch()
+//   //   .then(user => cb(null, user))
+//   //   .catch(err => cb(err))
+//   ),
+// ));
