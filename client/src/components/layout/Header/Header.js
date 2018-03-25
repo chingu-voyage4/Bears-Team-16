@@ -8,6 +8,7 @@ import Browse from './img/Browse.png'
 import Contact from './img/Contact.png'
 
 const Header = () => (
+    <div>
     <HeaderStyle>
         <div css={{ gridArea: 'header-logo'}}>logo</div>
         <NavBarStyle css={{ gridArea: 'header-navbar'}}>
@@ -27,6 +28,7 @@ const Header = () => (
             <SignUpButton>SIGN IN</SignUpButton>
         </NavBarStyle>
     </HeaderStyle>
+    </div>
 );
 
 export default Header;

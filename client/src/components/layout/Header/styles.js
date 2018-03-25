@@ -4,6 +4,10 @@ export const HeaderStyle = glamorous.div({
     backgroundColor: '#C8E6C9',
     height: 100,
     color: 'black',
+    position: "fixed",
+    left: "0",
+    top: "0",
+    width: "100%",
     '@supports (display: grid)': {
         display: 'grid',
         gridGap: 20,
