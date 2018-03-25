@@ -6,14 +6,20 @@ import keys from "../src/config/keys";
 // Start server
 require(`../src`);
 
-const api = axios.create({
-  baseURL: `http://localhost:${keys.PORT}`,
+const apiOptions = {
+  method: `POST`,
+  url: `http://localhost:${keys.PORT}`,
   timeout: 2000,
-});
+};
 
 export const request = async (req) => {
   try {
-    const { data } = await api.post(`/graphql`, req);
+    // const { data } = await api.post(`/graphql`, req);
+    const { data } = await axios({
+      ...apiOptions,
+      url: `${apiOptions.url}/graphql`,
+      data: req,
+    });
     if (data.errors) {
       console.log(data.errors[0]);
     }
@@ -27,9 +33,25 @@ export const request = async (req) => {
   }
 };
 
-export const login = async credentials => {
+export const authRequest = async (req) => {
+  const { data } = await axios({
+    ...apiOptions,
+    url: `${apiOptions.url}/graphql`,
+    data: req,
+    headers: {
+      Authorization: `testToken`,
+    },
+  });
+  return data;
+};
+
+export const signin = async (route, credentials) => {
   try {
-    const { data } = await api.post(`/login`, credentials);
+    const { data } = await axios({
+      ...apiOptions,
+      url: `${apiOptions.url + route}`,
+      data: credentials,
+    });
     return data;
   } catch (err) {
     const {
