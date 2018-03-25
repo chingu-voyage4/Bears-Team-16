@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import api from "../../utils/auth";
+import { decodeToken } from "../../utils/jwt";
 
 class TestLogin extends Component {
   constructor() {
     super();
     this.state = {
       token: null,
+      user: null,
     };
 
     this.auth = this.auth.bind(this);
@@ -13,15 +15,21 @@ class TestLogin extends Component {
 
   componentWillMount() {
     const token = window.localStorage.getItem(`recipes`);
-    this.setState({ token });
+    this.setState({
+      token,
+      user: decodeToken(token), // Decode token at any time to get the payload (user object)
+    });
   }
 
   async auth() {
     const auth = this.state.token;
     if (auth) {
       console.log(`Logging out...`);
-      window.localStorage.removeItem(`recipes`);
-      this.setState({ token: null });
+      window.localStorage.removeItem(`recipes`); // Remove token on logout
+      this.setState({
+        token: null,
+        user: null, // Clear store on logout
+      });
     } else {
       console.log(`Logging in...`);
       const { data } = await api.post(`/login`, {
@@ -34,7 +42,11 @@ class TestLogin extends Component {
       if (data) {
         console.log(`Success. Setting token`);
         window.localStorage.setItem(`recipes`, data.token);
-        this.setState({ token: data.token });
+        // Set user to store on login
+        this.setState({
+          token: data.token,
+          user: data.user,
+        });
       } else {
         console.log(`Login failed: `, data.errors);
       }
@@ -43,12 +55,11 @@ class TestLogin extends Component {
 
   render() {
     const auth = !!this.state.token;
-    console.log(this.state.token);
 
     return (
       <div>
-        <h3>{auth ? `Token found` : `No token found`}</h3>
         <button onClick={this.auth}>{auth ? `Logout` : `Login`}</button>
+        {auth && <div>{`Hello ${this.state.user.fname}`}</div>}
       </div>
     );
   }
