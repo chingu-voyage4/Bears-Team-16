@@ -51,7 +51,11 @@ export const resolvers = {
       .then(data => data && data.toJSON()),
   },
   Mutation: {
-    createRecipe: (_, { input }) => {
+    // TODO only allow registered users
+    createRecipe: (_, { input }, { headers: { authorization: token } }) => {
+      if (token) {
+        console.log(token);
+      }
       // FIXME must be a better way
       const vals = { ...input, user_id: input.author };
       delete vals.author;
