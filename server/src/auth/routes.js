@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import passport from "passport";
 import keys from "../config/keys";
 import { verifyEmail } from "../utils/auth";
+import { encodeToken } from "../utils/jwt";
+import { User } from "../models";
 
 module.exports = app => {
   // Verify if email exists
@@ -29,13 +31,31 @@ module.exports = app => {
         }
         // generate a signed jwt with the
         // contents of user object and return it in the response
-        const token = jwt.sign(user, keys.JWT_SECRET);
-        return res.json({ user, token });
+        return res.json({
+          user,
+          token: encodeToken(user),
+        });
       });
     })(req, res);
   });
 
-  app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {
-    res.send(req.user);
-  });
+  app.post(`/register`, async (req, res) =>
+    // TODO hash password
+    User
+      .forge()
+      .save(req.body)
+      .then(u => u.fetch())
+      .then(u => {
+        const user = u.toJSON();
+        res.json({
+          user,
+          token: encodeToken(user),
+        });
+      })
+      .catch(console.log));
+
+  // We're not using this at all
+  // app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {
+  //   res.send(req.user);
+  // });
 };
