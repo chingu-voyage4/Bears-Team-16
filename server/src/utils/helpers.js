@@ -10,7 +10,7 @@ export const flattenTemplates = (templates, test = []) => {
   return test;
 };
 
-// Ivert 2D array to test for types
+// Invert 2D array to test for types
 export const invert2D = arr =>
   arr[0].map((col, i) =>
     arr.map(row => row[i]));

@@ -1,8 +1,20 @@
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import keys from "../config/keys";
+import { verifyEmail } from "../utils/auth";
 
 module.exports = app => {
+  // Verify if email exists
+  app.post(`/email`, async (req, res) => {
+    const email = await verifyEmail(req.body.email);
+    // TODO handle correctly per client requirements
+    res.json({
+      message: email ?
+        `User found. Login.` :
+        `User not found. Register.`,
+    });
+  });
+
   app.post(`/login`, (req, res, next) => {
     passport.authenticate(`local`, { session: false }, (err, user, info) => {
       if (err || !user) {

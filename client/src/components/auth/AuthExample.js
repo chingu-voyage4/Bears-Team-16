@@ -20,7 +20,7 @@ class TestLogin extends Component {
     const auth = this.state.token;
     if (auth) {
       console.log(`Logging out...`);
-      window.localStorage.removeItem(`live`);
+      window.localStorage.removeItem(`recipes`);
       this.setState({ token: null });
     } else {
       console.log(`Logging in...`);
