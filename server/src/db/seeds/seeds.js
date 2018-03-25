@@ -35,5 +35,9 @@ export const seed = (knex, Promise) =>
     .then(() =>
       knex(`recipe_ingredients`).insert(genJoin(joinTemplates.recipe_ingredients)(limits.recipe_ingredients)))
     .then(() =>
-      knex(`users`).insert({ email: `mail@mail.com`, password: `12354` }));
+      knex(`users`).insert({
+        email: `mail@mail.com`,
+        password: `12354`,
+        fname: `Bear`,
+      }));
 
