@@ -1,6 +1,5 @@
-import jwt from "jsonwebtoken";
 import passport from "passport";
-import keys from "../config/keys";
+import bcrypt from "bcrypt";
 import { verifyEmail } from "../utils/auth";
 import { encodeToken } from "../utils/jwt";
 import { User } from "../models";
@@ -20,7 +19,7 @@ module.exports = app => {
   app.post(`/login`, (req, res, next) => {
     passport.authenticate(`local`, { session: false }, (err, user, info) => {
       if (err || !user) {
-        return res.status(400).json({
+        return res.json({
           message: `Something is not right`,
           user,
         });
@@ -39,20 +38,22 @@ module.exports = app => {
     })(req, res);
   });
 
-  app.post(`/register`, async (req, res) =>
-    // TODO hash password
-    User
+  app.post(`/register`, async (req, res) => {
+    const hashedPassword = bcrypt.hashSync(req.body.password, 12);
+    return User
       .forge()
-      .save(req.body)
+      .save({ ...req.body, password: hashedPassword })
       .then(u => u.fetch())
       .then(u => {
         const user = u.toJSON();
+        delete user.password;
         res.json({
           user,
           token: encodeToken(user),
         });
       })
-      .catch(console.log));
+      .catch(console.log);
+  });
 
   // We're not using this at all
   // app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {

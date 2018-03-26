@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import bcrypt from "bcrypt"; // Remove for production
 import { collTemplates, joinTemplates, limits } from "../../config/seeds";
 import { genTbl, genJoin } from "../../utils/seedGenerator";
 
@@ -37,7 +38,7 @@ export const seed = (knex, Promise) =>
     .then(() =>
       knex(`users`).insert({
         email: `mail@mail.com`,
-        password: `12354`,
+        password: bcrypt.hashSync(`12354`, 12),
         fname: `Bear`,
       }));
 

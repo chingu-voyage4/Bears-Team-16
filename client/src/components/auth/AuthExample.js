@@ -32,23 +32,24 @@ class TestLogin extends Component {
       });
     } else {
       console.log(`Logging in...`);
-      const { data } = await api.post(`/login`, {
+      try {
+        const { data } = await api.post(`/login`, {
         // Reseed database OR use credentials from your seeds
-        email: `mail@mail.com`,
-        password: `12354`,
-      });
-
-      // If valid user returned
-      if (data) {
-        console.log(`Success. Setting token`);
-        window.localStorage.setItem(`recipes`, data.token);
-        // Set user to store on login
-        this.setState({
-          token: data.token,
-          user: data.user,
+          email: `mail@mail.com`,
+          password: `12354`,
         });
-      } else {
-        console.log(`Login failed: `, data.errors);
+
+        // If valid user and token returned
+        if (data.user) {
+          console.log(`Success. Setting token`);
+          window.localStorage.setItem(`recipes`, data.token);
+          // Set user to store on login
+          this.setState({ token: data.token, user: data.user });
+        } else {
+          console.log(`Login failed: `, data.message);
+        }
+      } catch (err) {
+        console.log(err);
       }
     }
   }

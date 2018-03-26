@@ -2,6 +2,7 @@
   "name": "server",
   "version": "0.1.0",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bookshelf": "^0.12.1",
     "express": "^4.16.2",
@@ -48,14 +49,10 @@
     "start": "node ./build/index.js",
     "prestart": "npm run build",
     "dev": "nodemon src/index.js --exec babel-node",
-    "test":
-      "NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill --recursive ./test/ -t 5000 --exit",
-    "test-e2e":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 -b --exit",
-    "test-integration":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 -b --exit",
-    "test-unit":
-      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit -b --exit",
+    "test": "NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill --recursive ./test/ -t 5000 --exit",
+    "test-e2e": "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 -b --exit",
+    "test-integration": "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 -b --exit",
+    "test-unit": "mocha -r babel-register -r babel-polyfill --recursive ./test/unit -b --exit",
     "tdd": "npm run test-unit -- --watch",
     "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/config/db.js",
     "db-migrate": "npm run knex migrate:latest",

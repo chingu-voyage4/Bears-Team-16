@@ -4,7 +4,7 @@ import { signin, authRequest, reseed, rollback } from "../helpers";
 import { limits } from "../../src/config/seeds";
 import { verifyEmail } from "../../src/utils/auth";
 
-describe.only(`auth`, () => {
+describe(`auth`, () => {
   before(reseed);
   after(rollback);
 
@@ -30,14 +30,13 @@ describe.only(`auth`, () => {
     });
 
     it(`returns an error message on bad credentials`, async () => {
-      const { status, message } = await signin(`/login`, {
+      const { message } = await signin(`/login`, {
         email: `wrong@mail.com`,
         password: `wrongpassword`,
       });
 
       expect(message)
         .to.equal(`Something is not right`);
-      expect(status).to.equal(400);
     });
   });
 
