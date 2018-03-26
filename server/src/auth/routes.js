@@ -31,7 +31,6 @@ module.exports = app => {
         // generate a signed jwt with the
         // contents of user object and return it in the response
         return res.json({
-          user,
           token: encodeToken(user),
         });
       });
@@ -48,7 +47,6 @@ module.exports = app => {
         const user = u.toJSON();
         delete user.password;
         res.json({
-          user,
           token: encodeToken(user),
         });
       })

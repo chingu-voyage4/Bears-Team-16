@@ -18,8 +18,7 @@ export const decodeToken = token => {
   // TODO refactor
   try {
     const decoded = jwt.decode(token);
-    console.log(decoded);
-    return decoded.payload;
+    return decoded;
   } catch (err) {
     throw new Error(`Token invalid`);
   }
