@@ -124,7 +124,7 @@ class TestLogin extends Component {
     return (
       <div
         style={{
-          marginTop: `20px`,
+          marginTop: `120px`,
           outline: `1px black`,
           display: `flex`,
           justifyContent: `center`,
