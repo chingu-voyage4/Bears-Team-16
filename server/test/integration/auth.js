@@ -1,18 +1,12 @@
 /* eslint-disable no-undef */
 import { expect } from "chai";
-import { signin, authRequest, reseed, rollback } from "../helpers";
+import { signin, reseed, rollback } from "../helpers";
 import { limits } from "../../src/config/seeds";
-import { verifyEmail } from "../../src/utils/auth";
 import { decodeToken } from "../../src/utils/jwt";
 
 describe(`auth`, () => {
   before(reseed);
   after(rollback);
-
-  it(`verifies an email`, async () => {
-    expect(await verifyEmail(`mail@mail.com`)).to.be.true;
-    expect(await verifyEmail(`bad@mail.com`)).to.be.false;
-  });
 
   describe(`login`, () => {
     it(`returns an encoded token on succsessful login`, async () => {
@@ -59,21 +53,4 @@ describe(`auth`, () => {
         });
     });
   });
-
-  // describe(`authorized requests`, () => {
-  //   it(`checks client requests for correct tokens`, async () => {
-  //     const query = {
-  //       query: `
-  //       {
-  //         user(id: 5) {
-  //           fname
-  //         }
-  //       }
-  //       `,
-  //     };
-  //     const data = await authRequest(query);
-  //     console.log(data);
-  //     // TODO
-  //   });
-  // });
 });

@@ -1,16 +1,16 @@
 // config and export amount of seeded data
 
 export const limits = {
-  users: 5,
-  recipes: 15,
-  categories: 7,
+  users: 2,
+  recipes: 5,
+  categories: 5,
   units: 8,
-  ingredients: 25,
-  images: 25,
-  logs: 12,
-  favs: 30,
-  recipe_categories: 50,
-  recipe_ingredients: 60,
+  ingredients: 10,
+  images: 10,
+  logs: 10,
+  favs: 6,
+  recipe_categories: 12,
+  recipe_ingredients: 12,
 };
 
 /**
@@ -24,11 +24,7 @@ export const collTemplates = {
       null,
       true,
     ],
-    password: [
-      `string`,
-      null,
-      true,
-    ],
+    password: [ `string` ],
     fname: [ `fname` ],
     lname: [ `lname` ],
     bio: [ `sentence`, 1 ],
@@ -73,6 +69,7 @@ export const collTemplates = {
   },
 };
 
+// Junction tables seed config
 export const joinTemplates = {
   favs: {
     user_id: [ `int`, limits.users ],

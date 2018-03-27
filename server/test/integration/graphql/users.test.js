@@ -33,7 +33,7 @@ describe(`users`, () => {
       const { user } = await request({
         query: `
         {
-          user(id: 5) {
+          user(id: 2) {
             id
             fname
             lname
@@ -51,7 +51,7 @@ describe(`users`, () => {
           `fname`,
           `lname`,
         ])
-        .and.has.property(`id`, `5`);
+        .and.has.property(`id`, `2`);
     });
   });
 

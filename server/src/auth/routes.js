@@ -1,21 +1,9 @@
 import passport from "passport";
 import bcrypt from "bcrypt";
-import { verifyEmail } from "../utils/auth";
 import { encodeToken } from "../utils/jwt";
 import { User } from "../models";
 
 module.exports = app => {
-  // Verify if email exists
-  app.post(`/email`, async (req, res) => {
-    const email = await verifyEmail(req.body.email);
-    // TODO handle correctly per client requirements
-    res.json({
-      message: email ?
-        `User found. Login.` :
-        `User not found. Register.`,
-    });
-  });
-
   app.post(`/login`, (req, res, next) => {
     passport.authenticate(`local`, { session: false }, (err, user, info) => {
       if (err || !user) {
@@ -38,7 +26,7 @@ module.exports = app => {
   });
 
   app.post(`/register`, async (req, res) => {
-    const hashedPassword = bcrypt.hashSync(req.body.password, 12);
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
     return User
       .forge()
       .save({ ...req.body, password: hashedPassword })
@@ -52,9 +40,4 @@ module.exports = app => {
       })
       .catch(console.log);
   });
-
-  // We're not using this at all
-  // app.use(`/user`, passport.authenticate(`jwt`, { session: false }), (req, res, next) => {
-  //   res.send(req.user);
-  // });
 };

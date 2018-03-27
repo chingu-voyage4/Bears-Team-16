@@ -1,4 +1,5 @@
 import Chance from "chance";
+import bcrypt from "bcrypt";
 
 const c = new Chance();
 
@@ -39,9 +40,13 @@ export const genTbl = template => (t = 5) => {
         seeds[i][field] = uniqueFieldValue;
       });
     } else {
-      // !isUnique, skip unique arra generation
+      // !isUnique, skip unique array generation
       seeds.forEach((el, i) => {
-        seeds[i][field] = chance[gen](prm);
+        if (field === `password`) {
+          seeds[i].password = bcrypt.hash(chance[gen](prm), 8);
+        } else {
+          seeds[i][field] = chance[gen](prm);
+        }
       });
     }
   });
