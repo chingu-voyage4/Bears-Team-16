@@ -25,8 +25,8 @@ module.exports = app => {
     })(req, res);
   });
 
-  app.post(`/register`, async (req, res) => {
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+  app.post(`/register`, (req, res) => {
+    const hashedPassword = bcrypt.hashSync(req.body.password, 12);
     return User
       .forge()
       .save({ ...req.body, password: hashedPassword })

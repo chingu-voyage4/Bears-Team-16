@@ -43,7 +43,7 @@ export const genTbl = template => (t = 5) => {
       // !isUnique, skip unique array generation
       seeds.forEach((el, i) => {
         if (field === `password`) {
-          seeds[i].password = bcrypt.hash(chance[gen](prm), 8);
+          seeds[i].password = bcrypt.hashSync(chance[gen](prm), 8);
         } else {
           seeds[i][field] = chance[gen](prm);
         }

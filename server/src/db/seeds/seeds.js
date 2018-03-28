@@ -35,10 +35,10 @@ export const seed = (knex, Promise) =>
       knex(`recipe_categories`).insert(genJoin(joinTemplates.recipe_categories)(limits.recipe_categories)))
     .then(() =>
       knex(`recipe_ingredients`).insert(genJoin(joinTemplates.recipe_ingredients)(limits.recipe_ingredients)))
-    .then(async () =>
+    .then(() =>
       knex(`users`).insert({
         email: `mail@mail.com`,
-        password: await bcrypt.hash(`12354`, 12),
+        password: bcrypt.hashSync(`12354`, 12),
         fname: `Bear`,
       }));
 

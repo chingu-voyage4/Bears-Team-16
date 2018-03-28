@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import chai from "chai";
-import { User } from "../../src/models";
-import { reseed } from "../helpers";
+import { User } from "../../../src/models";
+import { reseed } from "../../helpers";
 
 chai.should();
 chai.use(require(`chai-things`));
