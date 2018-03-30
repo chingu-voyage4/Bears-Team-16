@@ -7,7 +7,7 @@ query {
   recipes {
     id
     author {
-      uname
+      fname
     }
     title
   }
@@ -21,7 +21,7 @@ const Home = ({ data, loading, error }) => (
       (!data.loading
         && !data.error
         && data.recipes.map(recipe =>
-          <li key={recipe.id}>{`${recipe.title} by ${recipe.author.uname}`}</li>))
+          <li key={recipe.id}>{`${recipe.title} by ${recipe.author.fname}`}</li>))
         || `Start server to see some tasty recipes!`
     }
     </ul>

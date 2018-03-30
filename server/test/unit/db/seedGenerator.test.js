@@ -1,7 +1,7 @@
 /* eslint-disable no-undef, no-unused-expressions */
 
 import chai from "chai";
-import { genTbl, genJoin } from "../../src/utils/seedGenerator";
+import { genTbl, genJoin } from "../../../src/utils/seedGenerator";
 
 chai.should();
 chai.use(require(`chai-things`));

@@ -1,4 +1,4 @@
-import keys from "../config/keys";
+import keys from "./keys";
 
 // Avoid ES6 export due to how knex handles arguments
 module.exports = {
@@ -14,9 +14,9 @@ module.exports = {
     max: 10,
   },
   migrations: {
-    directory: `${__dirname}/migrations`,
+    directory: `${__dirname}/../db/migrations`,
     tableName: `knex_migrations`,
   },
-  seeds: { directory: `${__dirname}/seeds` },
+  seeds: { directory: `${__dirname}/../db/seeds` },
   debug: process.env.NODE_ENV === `development`,
 };

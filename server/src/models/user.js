@@ -9,7 +9,8 @@ export default db.model(`User`, {
     return this.hasMany(`Recipe`);
   },
   favs() {
-    return this.belongsToMany(`Recipe`, `favs`);
+    return this
+      .belongsToMany(`Recipe`, `favs`);
   },
 });
 

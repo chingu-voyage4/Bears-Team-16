@@ -9,6 +9,14 @@ import registerServiceWorker from './registerServiceWorker';
 
 const client = new ApolloClient({
   uri: `http://localhost:4000/graphql`,
+  request: operation => {
+    // Sets context param received by GraphQL resolvers
+    operation.setContext({
+      headers: {
+        authorization: window.localStorage.getItem(`recipes`),
+      },
+    });
+  },
 });
 
 ReactDOM.hydrate(

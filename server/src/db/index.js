@@ -1,4 +1,4 @@
-import dbConfig from "./dbConfig";
+import dbConfig from "../config/db";
 
 const knex = require(`knex`)(dbConfig);
 

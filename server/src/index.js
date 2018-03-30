@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import graphqlHTTP from "express-graphql";
 import keys from "./config/keys";
 import schema from './graphql/';
+import { checkAuth } from "./utils/middleware";
 
 export const app = express();
 
@@ -13,15 +14,17 @@ app.use(bodyParser.json());
 app.use(morgan(`dev`));
 app.use(require(`cors`)());
 
-// Routes
-app.get(`/`, (req, res) => { res.json(`Howdy`); });
+require(`./auth/passport`);
+require(`./auth/routes`)(app);
+
 app.use(
   `/graphql`,
-  bodyParser.json(),
+  // checkAuth,
   graphqlHTTP({
     schema,
     graphiql: process.env.NODE_ENV === `development`,
   }),
 );
 
-app.listen(keys.PORT, () => console.log(`There will be ${process.env.NODE_ENV} recipes on ${keys.HOST}:${keys.PORT}.`));
+app.listen(keys.PORT, () =>
+  console.log(`There will be ${process.env.NODE_ENV} recipes on ${keys.HOST}:${keys.PORT}.`));
