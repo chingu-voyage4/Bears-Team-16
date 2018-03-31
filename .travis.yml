@@ -2,25 +2,21 @@ language: node_js
 node_js: lts/*
 cache:
   directories:
-    - node_modules
+  - node_modules
 matrix:
   include:
-    - node_js: lts/*
-      services:
-        - postgresql
-      env: TEST=server
-      before_script:
-        - psql -c "CREATE DATABASE recipes_test;" -U postgres
-        - psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" -U postgres
-      script: cd $TEST && npm install && npm test
-      deploy:
-        provider: heroku
-        skip_cleanup: true
-        app:
-          development: bearecipes
-        api_key:
-          secure: xIeAGDDXtG8AQOtpcxwvjq4wC8O3Pb0LrHMsdAUPw6K4vdZOI16HdRY0dS4WQ7sA+kdrAyqE3w38FO3Ltnenk2rfNeSnfTW5RQ5cXP1RDByYbzItW4ffUbhyV31WfnP9aw8/YuOyzQe/64t9ZNFTJ/Jeg3aiFvn6cOGrDAAWSBfnCb7BL2hLUdF78Q8y9buOdNu3xU2PikqrAlA3neSwup2grYtSIelmdckb+gMGPCX6I+KQVnHY4bSp4Wf+nzgwobevJxfi/oUK5CJDp/KB2c8BH+qsRmsv4Dia5tbvvvMHRa4Xc2JjqStGDCNeSW9ABTtmdsyLDvV4PMOwAIZ3pPWSHQXekSCDj4JQTM8YRqOJgN3NU+BHdzguVXzHhUi7xvniabX7K01wNrVKWS+KWWATAFgjwU7QHv3pD++CwQoK1AWzt3RhMLOpFIdaiVROD2AfRCmK/O7SQZeR7YnB4w2wXGhtG6HLi3kPBW4lUAMQDE12TaTFMuiLSESvhgDzZwql0BCWlbv2RW/RrxQy83RbSobHu3WhIz0yOtFsEM00xRF1TZtmXGoSHayE5XpYPkQWHZEggMG1Srh3VQxe1zcHz5VsyVTW9rcK7KnK1Ju99W6lk3+uv26unw+mtbLWa/p9jclBMFouBnz6yQPMwfIDovx16goqvaLvWmu+pwY=
-
-    - node_js: lts/*
-      env: TEST=client
-      script: cd $TEST && npm install && npm run test
+  - node_js: lts/*
+    env: TEST=client
+    script: cd $TEST && npm install && npm run test && npm run build
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      # keep_history: true
+      # target-branch: gh-pages
+      # repo: thinktwice13.github.io/bearecipes16
+      local-dir: client/build/
+      on:
+        branch: deployment/client
+      verbose: true
+      github_token:
+        secure: GdTWvdYiz8hg4Q9uytuTABM/ExjY4XDuHEWLY65ws5oOt6Wi5YS8Chohq4K+AjcDz/+s4J9hbvpAXcLItHLcVdcyX9rQbBnWX0Woz72THW4Fkk0rASTqFrAZItye5WODQMqXIkyJDNmJTeOeyDrelhqTZ8tjLRtyjW5LuOhv/YcugfJXfzX+fUdEdJ3DVpuwsU7b42Wk/geFSEYYm/pKyhDd23fvcleGtoMiNI4JrVh1+tbzh7zJ9d+jjjHCctkpivkl4QMRyIQa0aYkcSk+w20iA1juBS4LLC8lanoSX9qWqlmMaPHYz/6+ATTFhdRieS4+xig7kufIGgBGR7mVUzPYBwO0yb1P7LdtC0DKFj9yOm36doWjWHKWkk4wsv+OGR44Haf8l9zzRJsZsdPA1qyrDv88ioELbabOy5hYOGeoNZWNMJZV6e7GIfzY1TPmi1FCH3bK0Ahn38BngAfP14EjOgESLFSgUj1dSbCUhcJgol5xDvOSODOiqQ+Ta42gda1ISyqLnB8AlMEvDYx37A/OE4jK64egcJjvGk8VXwxc93RI+LGEjwVT3ZeXm9IOTk63vP9azFWFmWE74bbwNUvZlyI8w1/unrXyb+BDJ8U4XUQABlNyy03JG2+WxUlMlzv3uCtjJSYzQ03I5c223nypIfODa07WTxolzpqjNkI=

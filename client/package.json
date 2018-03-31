@@ -1,8 +1,10 @@
 {
   "name": "client",
+  "homepage": "https://thinktwice13.github.io/Bears-Team-16",
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/assetsTransformer.js",
       "\\.(css|less)$": "<rootDir>/assetsTransformer.js"
     }
   },
@@ -11,6 +13,7 @@
   "dependencies": {
     "apollo-boost": "^0.1.1",
     "axios": "^0.18.0",
+    "gh-pages": "^1.1.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.12.1",
     "graphql": "^0.13.1",
@@ -51,6 +54,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
