@@ -2,25 +2,33 @@ language: node_js
 node_js: lts/*
 cache:
   directories:
-    - node_modules
+  - node_modules
 matrix:
-  include:
-    - node_js: lts/*
-      services:
-        - postgresql
-      env: TEST=server
-      before_script:
-        - psql -c "CREATE DATABASE recipes_test;" -U postgres
-        - psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" -U postgres
-      script: cd $TEST && npm install && npm test
-      deploy:
-        provider: heroku
-        skip_cleanup: true
-        app:
-          development: bearecipes
-        api_key:
-          secure: xIeAGDDXtG8AQOtpcxwvjq4wC8O3Pb0LrHMsdAUPw6K4vdZOI16HdRY0dS4WQ7sA+kdrAyqE3w38FO3Ltnenk2rfNeSnfTW5RQ5cXP1RDByYbzItW4ffUbhyV31WfnP9aw8/YuOyzQe/64t9ZNFTJ/Jeg3aiFvn6cOGrDAAWSBfnCb7BL2hLUdF78Q8y9buOdNu3xU2PikqrAlA3neSwup2grYtSIelmdckb+gMGPCX6I+KQVnHY4bSp4Wf+nzgwobevJxfi/oUK5CJDp/KB2c8BH+qsRmsv4Dia5tbvvvMHRa4Xc2JjqStGDCNeSW9ABTtmdsyLDvV4PMOwAIZ3pPWSHQXekSCDj4JQTM8YRqOJgN3NU+BHdzguVXzHhUi7xvniabX7K01wNrVKWS+KWWATAFgjwU7QHv3pD++CwQoK1AWzt3RhMLOpFIdaiVROD2AfRCmK/O7SQZeR7YnB4w2wXGhtG6HLi3kPBW4lUAMQDE12TaTFMuiLSESvhgDzZwql0BCWlbv2RW/RrxQy83RbSobHu3WhIz0yOtFsEM00xRF1TZtmXGoSHayE5XpYPkQWHZEggMG1Srh3VQxe1zcHz5VsyVTW9rcK7KnK1Ju99W6lk3+uv26unw+mtbLWa/p9jclBMFouBnz6yQPMwfIDovx16goqvaLvWmu+pwY=
-
-    - node_js: lts/*
-      env: TEST=client
-      script: cd $TEST && npm install && npm run test
+  include:  
+  - node_js: lts/*
+    services:
+      - postgresql
+    env: TEST=server
+    before_script:
+      - psql -c "CREATE DATABASE recipes_test;" -U postgres
+      - psql -c "ALTER USER postgres WITH PASSWORD 'postgres';" -U postgres
+    script: cd $TEST && npm install && npm test
+    deploy:
+      provider: heroku
+      skip_cleanup: true
+      app:
+        development: bearecipes
+      api_key:
+        secure: xIeAGDDXtG8AQOtpcxwvjq4wC8O3Pb0LrHMsdAUPw6K4vdZOI16HdRY0dS4WQ7sA+kdrAyqE3w38FO3Ltnenk2rfNeSnfTW5RQ5cXP1RDByYbzItW4ffUbhyV31WfnP9aw8/YuOyzQe/64t9ZNFTJ/Jeg3aiFvn6cOGrDAAWSBfnCb7BL2hLUdF78Q8y9buOdNu3xU2PikqrAlA3neSwup2grYtSIelmdckb+gMGPCX6I+KQVnHY4bSp4Wf+nzgwobevJxfi/oUK5CJDp/KB2c8BH+qsRmsv4Dia5tbvvvMHRa4Xc2JjqStGDCNeSW9ABTtmdsyLDvV4PMOwAIZ3pPWSHQXekSCDj4JQTM8YRqOJgN3NU+BHdzguVXzHhUi7xvniabX7K01wNrVKWS+KWWATAFgjwU7QHv3pD++CwQoK1AWzt3RhMLOpFIdaiVROD2AfRCmK/O7SQZeR7YnB4w2wXGhtG6HLi3kPBW4lUAMQDE12TaTFMuiLSESvhgDzZwql0BCWlbv2RW/RrxQy83RbSobHu3WhIz0yOtFsEM00xRF1TZtmXGoSHayE5XpYPkQWHZEggMG1Srh3VQxe1zcHz5VsyVTW9rcK7KnK1Ju99W6lk3+uv26unw+mtbLWa/p9jclBMFouBnz6yQPMwfIDovx16goqvaLvWmu+pwY=
+  
+  - node_js: lts/*
+    env: TEST=client
+    script: cd $TEST && npm install && npm run test && npm run build
+    deploy:
+      provider: pages
+      skip_cleanup: true
+      local-dir: client/build/
+      on:
+        branch: development
+      github_token:
+        secure: vE7dGc64cK7UNVYWvsZ9VotZCn1Z8gCt0KviIJxxgwgdq86GTFApQrJK9r7djMbMkc3Ofz3V9EHLyHSfFqH0hLJ+sSaK4IekMzMPc2G4Bty4jdKouNdpsGM7NZS7EJUJd2lAy4DvFT5is76E9p2Cr+B+PgLH4hQ4xQRFJ/elAJbH+RVd19qgARUo+McPSIOW7TzP7OsKxWTle4i7dYGUeKpFKRZnmDlRzeUqUQo8fB1QWTBtjI84H8ECxCEWcH2dtHLS6qPv0HPpcDXBDj9VpNrpaPvwmeKzB8plFwKRU72ZIP4Q+e8jsfKcNkLG7zf61i973g8egg3XZS+UXue2HfwFRk5TTO580MWMQoZRwHa4eu1u/aIn6zwxfol61sG4Y5DBXjaPPI1EquwAopLfx1zp3IzFz/hwBBZHMla+3+SXXINX915MFLE17IiOeyDByBcXky+iBKinuHmUZk7+JtF8k0BIQV53X54WyXMY08FUWm+CY6SNP5j5CPbBvTgt35B1g4zIZIt9TGLfatDYgDNnUV6lS6Ns5aLdsvNgHkj2B3NpZxXYfyh1fngKZnrSfFdTPbSS8MTDXUsnSIfDTuepIl2KrZZraoNKLUjkL8LA/FEHhND71pAO/Ug6w2hHB+hPSEk93w4iM3ROpgCdDJc2m6K3hZtSzPkc7nrGXOc=
