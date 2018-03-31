@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */ // FIXME temporary for deployment test
+
 import React, { Component } from 'react';
-import api from "../../utils/auth";
+import api from "../../utils/api";
 import { decodeToken } from "../../utils/jwt";
 
 /* eslint-disable react/no-multi-comp */
@@ -93,6 +95,8 @@ class TestLogin extends Component {
             password: this.state.password,
           },
         );
+        console.log(data);
+
 
         // If valid user and token returned
         if (data.token) {
