@@ -20,12 +20,12 @@ const App = () => (
     <div>
       <Header />
       <Route exact path="/" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/AuthExample" component={AuthExample} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/browse" component={Browse} />
-      <Route path="/about" component={About} />
-      <Route path="/contact" component={Contact} />
+      <Route path={`${process.env.PUBLIC_URL}/login`} component={Login} />
+      <Route path={`${process.env.PUBLIC_URL}/AuthExample`} component={AuthExample} />
+      <Route path={`${process.env.PUBLIC_URL}/signup`} omponent={Signup} />
+      <Route path={`${process.env.PUBLIC_URL}/browse`} omponent={Browse} />
+      <Route path={`${process.env.PUBLIC_URL}/about`} omponent={About} />
+      <Route path={`${process.env.PUBLIC_URL}/contact`} omponent={Contact} />
       <Footer />
     </div>
   </Router>
