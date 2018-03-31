@@ -1,10 +1,7 @@
 export default {
   PORT: ``,
-  HOST: ``,
-  DB_HOST: ``,
-  DB_NAME: ``,
-  DB_USER: ``,
-  DB_PWD: ``,
   JWT_SECRET: ``,
+  // Eg. postgres://postgres:postgres@localhost/recipes
+  DATABASE_URL: `postgres://<USERNAME>:<PASSWORD>@<HOST>/<NAME>`,
 };
 

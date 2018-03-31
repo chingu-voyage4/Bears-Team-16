@@ -6,15 +6,18 @@ import { User } from "../models";
 module.exports = app => {
   app.post(`/login`, (req, res, next) => {
     passport.authenticate(`local`, { session: false }, (err, user, info) => {
-      if (err || !user) {
+      if (err) {
+        return res.json({ message: `Something went wrong.` });
+      }
+      if (!user) {
         return res.json({
-          message: `Something is not right`,
+          message: `Email or password incorrect.`,
           user,
         });
       }
-      req.login(user, { session: false }, (err) => {
-        if (err) {
-          res.send(err);
+      req.login(user, { session: false }, error => {
+        if (error) {
+          res.send(error);
         }
         // generate a signed jwt with the
         // contents of user object and return it in the response
