@@ -17,6 +17,10 @@ app.use(require(`cors`)());
 require(`./auth/passport`);
 require(`./auth/routes`)(app);
 
+app.get(`/`, (req, res) => {
+  res.redirect(`https://chingu-voyage4.github.io/Bears-Team-16`);
+});
+
 app.use(
   `/graphql`,
   // checkAuth,
