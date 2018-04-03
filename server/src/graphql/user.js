@@ -45,12 +45,6 @@ export const resolvers = {
       .where(filter).fetch({ withRelated: [ `recipes`, `favs` ] })
       .then(data => data && data.toJSON()),
   },
-  Mutation: { // TODO test me
-    createUser: (_, { input }) =>
-      User.forge()
-        .save(input)
-        .then(model => model.fetch())
-        .then(model => model.toJSON()),
-  },
+  Mutation: {},
   User: {},
 };
