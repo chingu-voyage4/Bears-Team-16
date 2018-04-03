@@ -12,16 +12,19 @@ const apiOptions = {
   timeout: 2000,
 };
 
-export const request = async (req) => {
+export const request = async (req, token) => {
   try {
     // const { data } = await api.post(`/graphql`, req);
     const { data } = await axios({
       ...apiOptions,
       url: `${apiOptions.url}/graphql`,
       data: req,
+      headers: {
+        Authorization: token,
+      },
     });
     if (data.errors) {
-      console.log(data.errors[0]);
+      return { message: data.errors[0].message };
     }
     return data.data;
   } catch (err) {
@@ -31,18 +34,6 @@ export const request = async (req) => {
     } = err.response;
     return { message, status };
   }
-};
-
-export const authRequest = async (req) => {
-  const { data } = await axios({
-    ...apiOptions,
-    url: `${apiOptions.url}/graphql`,
-    data: req,
-    headers: {
-      Authorization: `testToken`,
-    },
-  });
-  return data;
 };
 
 export const signin = async (route, credentials) => {

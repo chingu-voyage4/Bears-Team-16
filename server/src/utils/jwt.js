@@ -32,10 +32,8 @@ export const verifyToken = token => {
   // TODO reafactor
   try {
     const verified = jwt.verify(token, keys.JWT_SECRET);
-    console.log(verified);
     return verified;
   } catch (err) {
     return new Error(`Token invalid`);
   }
 };
-
