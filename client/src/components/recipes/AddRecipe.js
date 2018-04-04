@@ -3,61 +3,96 @@ import { Form, Text, Checkbox, NestedField, Select } from "react-form";
 
 const Ingredient = (props) => {
   const {
-    i, statusOptions, formApi,
+    i, statusOptions, formApi, initial, field,
   } = props;
-  return (<div key={`ingredient${i}`}>
-    <NestedField field={[ `ingredients`, i ]}>
-      <label htmlFor={`ingredient-name-${i}`}>
-    Ingredient
+  return initial ?
+    (<NestedField field={field}>
+      <label htmlFor="ingredient-name-initial">
+Ingredient
       </label>
       <Text
         field="ingredient-name"
-        id={`ingredient-name-${i}`}
+        id="ingredient-name-initial"
         placeholder="Ingredient name"
       />
-      <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
+      <label htmlFor="ingredient-amount-initial">Amount</label>
       <Text
         field="ingredient-amount"
-        id={`ingredient-amount-${i}`}
+        id="ingredient-amount-initial"
         type="number"
         min="0"
         max="100"
         placeholder="Amount"
       />
-      <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
+      <label htmlFor="ingredient-unit-initial">Unit</label>
       <Select
         field="ingredient-unit"
-        id={`ingredient-unit-${i}`}
+        id="ingredient-unit-initial"
         options={statusOptions}
         placeholder="Select unit"
       />
+     </NestedField>)
+    : (<div key={`ingredient${i}`}>
+      <NestedField field={[ `ingredients`, i ]}>
+        <label htmlFor={`ingredient-name-${i}`}>
+    Ingredient
+        </label>
+        <Text
+          field="ingredient-name"
+          id={`ingredient-name-${i}`}
+          placeholder="Ingredient name"
+        />
+        <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
+        <Text
+          field="ingredient-amount"
+          id={`ingredient-amount-${i}`}
+          type="number"
+          min="0"
+          max="100"
+          placeholder="Amount"
+        />
+        <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
+        <Select
+          field="ingredient-unit"
+          id={`ingredient-unit-${i}`}
+          options={statusOptions}
+          placeholder="Select unit"
+        />
 
-      <button
-        onClick={() => formApi.removeValue(`ingredients`, i)}
-        type="button"
-      >
+        <button
+          onClick={() => formApi.removeValue(`ingredients`, i)}
+          type="button"
+        >
     Remove
-      </button>
-    </NestedField>
-  </div>);
+        </button>
+      </NestedField>
+    </div>);
 };
 
 const Step = (props) => {
-  const { i, formApi } = props;
-  return (
-    <div key={`step${i}`}>
-      <label htmlFor={`step-${i}`}>
+  const {
+    i, formApi, id, field, initial,
+  } = props;
+  return initial ? (
+    <div>
+      <label htmlFor="stepInitial">
+                    Step 1
+      </label>
+      <Text field={[ `stepInitial` ]} id="stepInitial" />
+    </div>)
+    :
+    (<div>
+      <label htmlFor={id}>
                         Step {`${i + 2}`}
       </label>
-      <Text field={[ `steps`, i ]} id={`step-${i}`} />
+      <Text field={field} id={id} />
       <button
         onClick={() => formApi.removeValue(`steps`, i)}
         type="button"
       >
                         Remove
       </button>
-    </div>
-  );
+     </div>);
 };
 class AddRecipe extends Component {
   constructor(props) {
@@ -166,35 +201,10 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item ingredients">
                   <h3>Ingredients</h3>
-                  <NestedField field={[ `ingredientsInitial` ]}>
-                    <label htmlFor="ingredient-name-initial">
-    Ingredient
-                    </label>
-                    <Text
-                      field="ingredient-name"
-                      id="ingredient-name-initial"
-                      placeholder="Ingredient name"
-                    />
-                    <label htmlFor="ingredient-amount-initial">Amount</label>
-                    <Text
-                      field="ingredient-amount"
-                      id="ingredient-amount-initial"
-                      type="number"
-                      min="0"
-                      max="100"
-                      placeholder="Amount"
-                    />
-                    <label htmlFor="ingredient-unit-initial">Unit</label>
-                    <Select
-                      field="ingredient-unit"
-                      id="ingredient-unit-initial"
-                      options={statusOptions}
-                      placeholder="Select unit"
-                    />
-                  </NestedField>
+                  <Ingredient i="" statusOptions={statusOptions} formApi={formApi} field={[ `ingredientsInitial` ]} initial />
                   {formApi.values.ingredients &&
                   formApi.values.ingredients.map((ingredient, i) => (
-                    <Ingredient i={i} statusOptions={statusOptions} formApi={formApi} key={`ingredient${i}`} />
+                    <Ingredient i={i} statusOptions={statusOptions} formApi={formApi} key={`ingredient${i}`} initial={false} />
                   ))}
                   <button
                     onClick={() => formApi.addValue(`ingredients`, ``)}
@@ -205,13 +215,10 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item steps">
                   <h3>Cooking steps</h3>
-                  <label htmlFor="stepInitial">
-                    Step 1
-                  </label>
-                  <Text field={[ `stepInitial` ]} id="stepInitial" />
+                  <Step i="" initial />
                   {formApi.values.steps &&
                   formApi.values.steps.map((step, i) => (
-                    <Step i={i} key={`step${i}`} formApi={formApi} />
+                    <Step i={i} key={`step${i}`} formApi={formApi} id={`steps-${i}`} field={[ `steps`, i ]} initial={false} />
                   ))}
                   <button
                     onClick={() => formApi.addValue(`steps`, ``)}
