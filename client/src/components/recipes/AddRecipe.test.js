@@ -44,7 +44,7 @@ describe(`<AddRecipe />`, () => {
 
   it(`should have a NestedField with a class of recipe-categories`, () => {
     const wrapper = mount(<AddRecipe />);
-    expect(wrapper.find(NestedField).length).toEqual(1);
+    expect(wrapper.find(NestedField).length).toEqual(2);
     expect(wrapper.find(`NestedField.recipe-categories`).length).toEqual(1);
   });
 
@@ -64,10 +64,14 @@ describe(`<AddRecipe />`, () => {
   it(`should have ingredients`, () => {
     const wrapper = mount(<AddRecipe />);
     expect(wrapper.find(`.ingredients`).length).toEqual(1);
+    expect(wrapper.find(`input#ingredient-name-initial`).length).toEqual(1);
+    expect(wrapper.find(`input#ingredient-amount-initial`).length).toEqual(1);
+    expect(wrapper.find(`select#ingredient-unit-initial`).length).toEqual(1);
   });
 
   it(`should have steps`, () => {
     const wrapper = mount(<AddRecipe />);
     expect(wrapper.find(`.steps`).length).toEqual(1);
+    expect(wrapper.find(`input#stepInitial`).length).toEqual(1);
   });
 });
