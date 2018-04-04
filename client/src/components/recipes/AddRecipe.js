@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Text, Checkbox, NestedField, Select } from "react-form";
+import { Form, Text, Checkbox, NestedField, Select, TextArea } from "react-form";
 
 const Ingredient = (props) => {
   const {
@@ -103,7 +103,7 @@ class AddRecipe extends Component {
   }
   handleSubmit(recipe) {
     const {
-      title, portions, cooktime, categories, ingredients, ingredientsInitial, steps, stepInitial,
+      title, portions, cooktime, description, categories, ingredients, ingredientsInitial, steps, stepInitial,
     } = recipe;
     const initialIngredients = ingredientsInitial
       ? [ ingredientsInitial ]
@@ -117,6 +117,7 @@ class AddRecipe extends Component {
       title,
       portions,
       cooktime,
+      description,
       categories,
       ingredients: combinedIngredients,
       steps: combinedSteps,
@@ -181,6 +182,17 @@ class AddRecipe extends Component {
                     min="0"
                     max="300"
                     step="1"
+                  />
+                  <label htmlFor="description">Description of the recipe.</label>
+                  <TextArea
+                    id="description"
+                    field="description"
+                    placeholder="ex. Spicy dish that goes well with a cool lager."
+                    type="text"
+                    maxlength="256"
+                    wrap="soft"
+                    rows="5"
+                    cols="25"
                   />
                 </div>
                 <div className="form__recipe-item">
