@@ -42,6 +42,12 @@ describe(`<AddRecipe />`, () => {
     expect(wrapper.find(`input#cooktime`).length).toEqual(1);
   });
 
+  it(`should have a description input`, () => {
+    const wrapper = mount(<AddRecipe />);
+    expect(wrapper.find(`[htmlFor="description"]`).length).toEqual(1);
+    expect(wrapper.find(`textarea#description`).length).toEqual(1);
+  });
+
   it(`should have a NestedField with a class of recipe-categories`, () => {
     const wrapper = mount(<AddRecipe />);
     expect(wrapper.find(NestedField).length).toEqual(2);
