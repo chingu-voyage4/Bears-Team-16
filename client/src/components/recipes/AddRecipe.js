@@ -42,6 +42,7 @@ class AddRecipe extends Component {
                     field="title"
                     placeholder="ex. Jambalaya"
                     type="text"
+                    className="recipe-title"
                   />
                   <label htmlFor="portions">Portions</label>
                   <Text
@@ -52,6 +53,7 @@ class AddRecipe extends Component {
                     min="0"
                     max="12"
                     step="1"
+                    className="portis"
                   />
                   <label htmlFor="cooktime">Cooktime in minutes</label>
                   <Text
@@ -66,7 +68,7 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item">
                   <h3>Categories</h3>
-                  <NestedField field="categories">
+                  <NestedField field="categories" className="recipe-categories">
                     <label htmlFor="beef">beef</label>
                     <Checkbox field="beef" id="beef" style={style} />
                     <br />
@@ -80,7 +82,7 @@ class AddRecipe extends Component {
                     <Checkbox field="pasta" id="pasta" style={style} />
                   </NestedField>
                 </div>
-                <div className="form__recipe-item">
+                <div className="form__recipe-item ingredients">
                   <h3>Ingredients</h3>
                   {formApi.values.ingredients &&
                   formApi.values.ingredients.map((ingredient, i) => (
@@ -129,7 +131,7 @@ class AddRecipe extends Component {
                   Add Ingredient
                   </button>
                 </div>
-                <div className="form__recipe-item">
+                <div className="form__recipe-item steps">
                   <h3>Cooking steps</h3>
                   {formApi.values.steps &&
                   formApi.values.steps.map((step, i) => (
