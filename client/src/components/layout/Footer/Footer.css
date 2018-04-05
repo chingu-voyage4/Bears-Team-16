@@ -1,0 +1,50 @@
+.top-wrapper {
+  margin-top: 200px;
+  background-color: #c8e6c9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Adding flex 1 make the two divs below equal */
+.icons-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icons-description {
+  text-align: center;
+}
+
+.icons-description-primary {
+  display: block;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.icons-description-secondary {
+  display: block;
+  font-size: 14px;
+}
+
+.icon {
+  height: 50px;
+}
+
+.text {
+  flex: 1;
+}
+
+.bottom-wrapper {
+  padding: 20px;
+  background-color: #afdab0;
+  text-align: center;
+}
+
+.copyright {
+  font-weight: 700;
+}
