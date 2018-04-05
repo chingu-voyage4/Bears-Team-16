@@ -1,4 +1,5 @@
 import { Recipe } from "../models";
+import { verifyToken } from "../utils/jwt";
 
 export const name = `Recipe`;
 
@@ -20,6 +21,13 @@ input RecipeInput {
   instructions: String!
   prep_time: Int!
 }
+input RecipeUpdate {
+  id: ID!
+  title: String
+  description: String
+  instructions: String
+  prep_time: Int
+}
 `;
 
 export const queries = `
@@ -29,6 +37,7 @@ export const queries = `
 
 export const mutations = `
   createRecipe(input: RecipeInput): Recipe
+  updateRecipe(input: RecipeUpdate): Recipe
 `;
 
 export const resolvers = {
@@ -63,6 +72,20 @@ export const resolvers = {
         .save(vals)
         .then(model => model.fetch())
         .then(model => model.toJSON());
+    },
+    updateRecipe: (_, { input }, context) => {
+      const authUser = verifyToken(context.headers.authorization);
+      if (authUser) {
+        const { id, ...valsToUpdate } = input;
+        return Recipe.where({
+          id,
+          user_id: authUser.id,
+        })
+          .save(valsToUpdate, { patch: true })
+          .then(model => model.fetch())
+          .then(model => model.toJSON());
+      }
+      throw new Error(`Unauthorized`);
     },
   },
   Recipe: {},

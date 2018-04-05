@@ -40,5 +40,13 @@ export const seed = (knex, Promise) =>
         email: `mail@mail.com`,
         password: bcrypt.hashSync(`12354`, 12),
         fname: `Bear`,
+      }))
+    .then(() =>
+      knex(`recipes`).insert({
+        title: `Recipe to test update`,
+        user_id: 2,
+        description: `Recipe description to update`,
+        instructions: `Fake instructions`,
+        prep_time: 20,
       }));
 

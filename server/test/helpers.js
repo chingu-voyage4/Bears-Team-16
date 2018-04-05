@@ -20,7 +20,7 @@ export const request = async (req, token) => {
       url: `${apiOptions.url}/graphql`,
       data: req,
       headers: {
-        Authorization: token,
+        Authorization: token || ``,
       },
     });
     if (data.errors) {

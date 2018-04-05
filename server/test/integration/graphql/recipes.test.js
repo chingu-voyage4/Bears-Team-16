@@ -2,6 +2,7 @@
 import chai, { expect } from "chai";
 import { reseed, rollback, request } from "../../helpers";
 import { limits } from "../../../src/config/seeds";
+import { encodeToken } from "../../../src/utils/jwt";
 
 chai.should();
 chai.use(require(`chai-things`));
@@ -113,9 +114,62 @@ describe(`recipes`, () => {
 
       });
       createRecipe.should.deep.include({
-        id: (limits.recipes + 1).toString(),
+        id: (limits.recipes + 2).toString(),
         title: `my new recipe`,
       });
+    });
+
+
+    it(`can update a record by id`, async () => {
+      const { updateRecipe } = await request({
+      // Check for relations
+        query: `
+          mutation Mutation($updatedRecipe: RecipeUpdate) {
+            updateRecipe(input: $updatedRecipe) {
+              id
+              title
+              description
+              prep_time
+              instructions
+            }
+          }`,
+        variables: `{
+          "updatedRecipe": {
+            "id": ${limits.recipes + 1},
+            "description":"New recipe description",
+            "prep_time": 100
+          }
+        }`,
+      }, encodeToken({ id: 2 }));
+
+      expect(updateRecipe).to.be.an(`object`)
+        .that.includes({
+          id: (limits.recipes + 1).toString(),
+          description: `New recipe description`,
+          prep_time: 100,
+        })
+        .and.that.has.key(`instructions`);
+    });
+
+    it(`receives 'Unauthorized' message on update with incorrect id`, async () => {
+      const token = encodeToken({ id: 12 });
+      const data = await request({
+      // Check for relations
+        query: `
+          mutation Mutation($updatedRecipe: RecipeUpdate) {
+            updateRecipe(input: $updatedRecipe) {
+              id
+            }
+          }`,
+        variables: `{
+          "updatedRecipe": {
+            "id": 2,
+            "description":"Wannabe new description"
+          }
+        }`,
+      }, token);
+      // FIXME
+      expect(data.message).to.equal(`No Rows Updated`);
     });
   });
 });

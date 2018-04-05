@@ -56,7 +56,7 @@ describe(`users`, () => {
     });
   });
 
-  describe.only(`mutations`, () => {
+  describe(`mutations`, () => {
     beforeEach(reseed);
     afterEach(rollback);
 
