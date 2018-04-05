@@ -1,5 +1,5 @@
 import { User } from "../models";
-import { verifyToken } from "../utils/jwt";
+import { verifyToken, decodeToken } from "../utils/jwt";
 
 export const name = `User`;
 
@@ -46,6 +46,7 @@ export const queries = `
 export const mutations = `
   createUser(input: UserInput): User
   updateUser(input: UserUpdate): User
+  addFav(id: ID): String
 
 `;
 
@@ -71,6 +72,12 @@ export const resolvers = {
           .then(model => model.toJSON());
       }
       throw new Error(`Unauthorized`);
+    },
+    addFav: (_, { id: recipeId }, context) => {
+      const user = verifyToken(context.headers.authorization);
+      if (user) {
+        return User.forge({ recipe_id, user_id: user.id });
+      }
     },
   },
   User: {},
