@@ -28,7 +28,7 @@ describe(`recipes`, () => {
 
       recipes
         .should.be.an(`array`)
-        .that.has.length(limits.recipes)
+        .that.has.length(limits.recipes + 1)
         .and.all.include.keys([
           `title`,
           `id`,

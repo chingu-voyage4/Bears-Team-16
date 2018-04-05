@@ -7,6 +7,28 @@ chai.should();
 chai.use(require(`chai-things`));
 
 describe(`ingredients`, () => {
+  describe(`queries`, () => {
+    before(reseed); // Seed once before all queries
+
+    it(`can query all records`, async () => {
+      // TODO check relations
+      const { ingredients } = await request({
+        query: `
+        {
+          ingredients {
+            id
+            name
+          }
+        }
+        `,
+      });
+
+      ingredients
+        .should.be.an(`array`)
+        .that.has.length(limits.ingredients)
+        .and.all.include.keys([ `name`, `id` ]);
+    });
+  });
   describe(`mutations`, () => {
     beforeEach(reseed);
     afterEach(rollback);

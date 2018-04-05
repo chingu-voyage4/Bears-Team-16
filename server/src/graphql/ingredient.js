@@ -13,6 +13,7 @@ input IngredientInput {
 `;
 
 export const queries = `
+  ingredients: [Ingredient]
 `;
 
 export const mutations = `
@@ -20,7 +21,11 @@ export const mutations = `
 `;
 
 export const resolvers = {
-  Query: {},
+  Query: {
+    ingredients: () =>
+      Ingredient.fetchAll()
+        .then(data => data && data.toJSON()),
+  },
   Mutation: {
     createIngredient: (_, { input }) => Ingredient.forge().save(input)
       .then(model => model.fetch()).then(model => model.toJSON()),
