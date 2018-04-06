@@ -6,15 +6,15 @@ import { HeaderStyle, NavBarStyle, NavStyle, Input, NavItem, SignUpButton } from
 
 
 const Header = () => (
-    <div>
+    <div style={{ marginBottom: `100px` }}>
         <HeaderStyle>
             <div css={{ gridArea: `header-logo` }}>logo</div>
             <NavBarStyle css={{ gridArea: `header-navbar` }}>
                 <NavStyle>
-                    <Link to="/login" style={{ textDecoration: `none` }}><img src='/icons/HOME.svg' /><NavItem>HOME</NavItem></Link>
+                    <Link to="/" style={{ textDecoration: `none` }}><img src='/icons/HOME.svg' /><NavItem>HOME</NavItem></Link>
                 </NavStyle>
                 <NavStyle>
-                    <Link to="/browse" style={{ textDecoration: `none` }}><img src='/icons/BROWSE.svg' /><NavItem>BROWSE</NavItem></Link>
+                    <Link to="/browse" style={{ textDecoration: `none` }}><img src='icons/Browse.svg' /><NavItem>BROWSE</NavItem></Link>
                 </NavStyle>
                 <NavStyle>
                     <Link to="/about" style={{ textDecoration: `none` }}><img src='/icons/ABOUT.svg' /><NavItem>ABOUT</NavItem></Link>
