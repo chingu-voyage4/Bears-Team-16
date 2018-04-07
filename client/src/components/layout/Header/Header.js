@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { HeaderStyle, NavBarStyle, NavStyle, Input, NavItem, SignUpButton } from './styles.js';
 
-
 const Header = () => (
     <div style={{ marginBottom: `100px` }}>
         <HeaderStyle>

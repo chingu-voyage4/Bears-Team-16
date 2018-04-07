@@ -4,7 +4,7 @@ export const FooterStyle = glamorous.div({
     backgroundColor: '#C8E6C9',
     height: 400,
     color: 'black',
-    position: "fixed",
+    position: "absolute",
     left: "0",
     bottom: "0",
     width: "100%",
