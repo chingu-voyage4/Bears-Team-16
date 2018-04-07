@@ -10,13 +10,13 @@ const Header = () => (
             <div css={{ gridArea: `header-logo` }}>logo</div>
             <NavBarStyle css={{ gridArea: `header-navbar` }}>
                 <NavStyle>
-                    <Link to="/" style={{ textDecoration: `none` }}><img src='/icons/HOME.svg' /><NavItem>HOME</NavItem></Link>
+                    <Link to="/" style={{ textDecoration: `none` }}><img src='/icons/Home.svg' /><NavItem>HOME</NavItem></Link>
                 </NavStyle>
                 <NavStyle>
-                    <Link to="/browse" style={{ textDecoration: `none` }}><img src='icons/Browse.svg' /><NavItem>BROWSE</NavItem></Link>
+                    <Link to="/browse" style={{ textDecoration: `none` }}><img src='/icons/Browse.svg' /><NavItem>BROWSE</NavItem></Link>
                 </NavStyle>
                 <NavStyle>
-                    <Link to="/about" style={{ textDecoration: `none` }}><img src='/icons/ABOUT.svg' /><NavItem>ABOUT</NavItem></Link>
+                    <Link to="/about" style={{ textDecoration: `none` }}><img src='/icons/About.svg' /><NavItem>ABOUT</NavItem></Link>
                 </NavStyle>
                 <NavStyle>
                     <Link to="/contact" style={{ textDecoration: `none` }}><img src='/icons/Contact.svg' /><NavItem>CONTACT</NavItem></Link>
