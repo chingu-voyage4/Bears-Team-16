@@ -61,6 +61,8 @@
     "db-migrate": "npm run knex migrate:latest",
     "db-rollback": "npm run knex migrate:rollback",
     "db-seed": "npm run knex seed:run",
-    "db-reseed": "npm run db-rollback && npm run db-migrate && npm run db-seed"
-  }
+    "db-reseed": "npm run db-rollback && npm run db-migrate && npm run db-seed",
+    "heroku-postbuild": "npm install && npm install --only=dev && npm run build"
+  },
+  "cacheDirectories": "node_modules"
 }

@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import graphqlHTTP from "express-graphql";
 import keys from "./config/keys";
 import schema from './graphql/';
-import { checkAuth } from "./utils/middleware";
+// import { checkAuth } from "./utils/middleware";
 
 export const app = express();
 
@@ -17,6 +17,10 @@ app.use(require(`cors`)());
 require(`./auth/passport`);
 require(`./auth/routes`)(app);
 
+app.get(`/`, (req, res) => {
+  res.redirect(`https://chingu-voyage4.github.io/Bears-Team-16`);
+});
+
 app.use(
   `/graphql`,
   // checkAuth,
@@ -27,4 +31,4 @@ app.use(
 );
 
 app.listen(keys.PORT, () =>
-  console.log(`There will be ${process.env.NODE_ENV} recipes on ${keys.HOST}:${keys.PORT}.`));
+  console.log(`There will be ${process.env.NODE_ENV} recipes on port ${keys.PORT}.`));

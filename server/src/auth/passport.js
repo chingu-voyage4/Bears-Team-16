@@ -12,9 +12,10 @@ passport.use(new LocalStrategy({
       .then(async model => {
         const user = model && model.toJSON();
         // Check untered password with the stored hash
-        const isCorrectPassword = await bcrypt.compareSync(password, user.password);
-        if (!user || !isCorrectPassword) {
-          return cb(null, false, { message: `Incorrect email or password` });
+        if (!user || !(await bcrypt.compareSync(password, user.password))) {
+          return cb(null, false, {
+            message: `Email or password incorrect.`,
+          });
         }
         delete user.password;
         return cb(null, user, { message: `Logged in successfully` });

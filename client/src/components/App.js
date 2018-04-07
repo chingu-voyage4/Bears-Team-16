@@ -15,7 +15,7 @@ import AuthExample from "./auth/AuthExample";
 /* OTHER COMPONENTS */
 
 const App = () => (
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <div>
       <Header />
       <Route exact path="/" component={Home} />

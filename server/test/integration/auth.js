@@ -28,9 +28,7 @@ describe(`auth`, () => {
         email: `wrong@mail.com`,
         password: `wrongpassword`,
       });
-
-      expect(message)
-        .to.equal(`Something is not right`);
+      expect(message).to.equal(`Email or password incorrect.`);
     });
   });
 

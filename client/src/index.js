@@ -4,10 +4,11 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import './index.css';
 import App from './components/App';
+import { baseURL } from "./utils/api";
 import registerServiceWorker from './registerServiceWorker';
 
 const client = new ApolloClient({
-  uri: `http://localhost:4000/graphql`,
+  uri: `${baseURL}/graphql`,
   request: operation => {
     // Sets context param received by GraphQL resolvers
     operation.setContext({
