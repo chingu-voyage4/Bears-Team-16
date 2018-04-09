@@ -16,8 +16,9 @@ import AuthExample from "./auth/AuthExample";
 
 const App = () => (
   <Router basename={process.env.PUBLIC_URL}>
-    <div>
+      <div >
       <Header />
+        <div style={{  minHeight: `calc(100vh - 40px)` }}>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/AuthExample" component={AuthExample} />
@@ -25,6 +26,7 @@ const App = () => (
       <Route path="/browse" component={Browse} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+        </div>
       <Footer />
     </div>
   </Router>
