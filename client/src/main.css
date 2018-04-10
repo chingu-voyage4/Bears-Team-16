@@ -158,7 +158,7 @@ body {
 
 .header {
   height: 95vh;
-  background-image: linear-gradient(to right, rgba(255, 240, 159, 0.8), rgba(127, 120, 80, 0.8)), url(/images/cooking.jpg);
+  background-image: linear-gradient(to right, rgba(255, 240, 159, 0.8), rgba(127, 120, 80, 0.8)), url(sass/background/cooking.jpg);
   background-size: cover;
   background-position: top;
   position: relative;
