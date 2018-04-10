@@ -1,0 +1,32 @@
+footer {
+  background-color: #c8e6c9;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 0;
+  right:0;
+  bottom: 0;
+}
+
+/* Adding flex 1 make the two divs below equal */
+.icons {
+  flex: 1;
+  text-align: center;
+}
+
+.icon {
+  height: 50px;
+  margin: 0px 10px;
+}
+
+.bottom-wrapper {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+.copyright {
+  font-weight: 700;
+}

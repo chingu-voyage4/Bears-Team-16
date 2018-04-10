@@ -3,6 +3,7 @@ import glamorous from 'glamorous';
 export const HeaderStyle = glamorous.div({
     backgroundColor: '#C8E6C9',
     height: 100,
+    marginBottom: 100,
     color: 'black',
     position: "fixed",
     left: "0",
