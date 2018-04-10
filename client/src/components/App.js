@@ -8,6 +8,7 @@ import Home from "./layout/Home";
 import About from "./layout/About";
 import Browse from "./layout/Browse";
 import Contact from "./layout/Contact";
+import LandingPage from "./layout/LandingPage";
 /* AUTH COMPONENT */
 import Signin from "./auth/Signin";
 /* OTHER */
@@ -45,7 +46,7 @@ export default class extends React.Component {
         <Router basename={process.env.PUBLIC_URL}>
           <div>
             <Header />
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={LandingPage} />
             <Route path="/signin" component={Signin} />
             <Route path="/browse" component={Browse} />
             <Route path="/about" component={About} />
