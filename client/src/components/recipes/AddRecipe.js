@@ -16,6 +16,7 @@ Ingredient
           field="ingredient-name"
           id="ingredient-name-initial"
           placeholder="Ingredient name"
+          validate={validators.ingredientNameValidate}
         />
         <label htmlFor="ingredient-amount-initial">Amount</label>
         <Text
@@ -25,6 +26,7 @@ Ingredient
           min="0"
           max="100"
           placeholder="Amount"
+          validate={validators.ingredientAmountValidate}
         />
         <label htmlFor="ingredient-unit-initial">Unit</label>
         <Select
@@ -32,6 +34,7 @@ Ingredient
           id="ingredient-unit-initial"
           options={statusOptions}
           placeholder="Select unit"
+            // validate={validators.ingredientUnitValidate}
         />
       </NestedField>)
     : (
@@ -44,6 +47,7 @@ Ingredient
             field="ingredient-name"
             id={`ingredient-name-${i}`}
             placeholder="Ingredient name"
+            validate={validators.ingredientNameValidate}
           />
           <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
           <Text
@@ -53,6 +57,7 @@ Ingredient
             min="0"
             max="100"
             placeholder="Amount"
+            validate={validators.ingredientAmountValidate}
           />
           <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
           <Select
@@ -60,6 +65,7 @@ Ingredient
             id={`ingredient-unit-${i}`}
             options={statusOptions}
             placeholder="Select unit"
+            // validate={validators.ingredientUnitValidate}
           />
 
           <button
@@ -81,7 +87,11 @@ const Step = (props) => {
       <label htmlFor="stepInitial">
                     Step 1
       </label>
-      <Text field={[ `stepInitial` ]} id="stepInitial" />
+      <Text
+        field={[ `stepInitial` ]}
+        id="stepInitial"
+        validate={validators.stepValidate}
+      />
     </div>)
     :
     (
@@ -89,7 +99,11 @@ const Step = (props) => {
         <label htmlFor={id}>
                         Step {`${i + 2}`}
         </label>
-        <Text field={field} id={id} />
+        <Text
+          field={field}
+          id={id}
+          validate={validators.stepValidate}
+        />
         <button
           onClick={() => formApi.removeValue(`steps`, i)}
           type="button"
@@ -105,12 +119,13 @@ class AddRecipe extends Component {
       recipe: null,
     };
   }
-  handleFormChange(formstate, api) {
+  handleFormChange(api) {
     // console.log(formstate, `formstate`);
     // console.log(api, `touched`);
-    console.log(api.errors, `errors`);
-    console.log(api.warnings, `warnings`);
-    console.log(api.successes, `successes`);
+    // console.log(api.errors, `errors`);
+    // console.log(api.warnings, `warnings`);
+    // console.log(api.successes, `successes`);
+    console.log(api.values, `value`);
   }
 
   handleSubmit(recipe) {
@@ -126,7 +141,7 @@ class AddRecipe extends Component {
       : initialIngredients;
     const initialSteps = stepInitial ? [ stepInitial ] : null;
     const combinedSteps = steps ? [ ...initialSteps, ...steps ] : initialSteps;
-    const fixed = {
+    const cleaned = {
       title,
       portions,
       cooktime,
@@ -136,7 +151,7 @@ class AddRecipe extends Component {
       steps: combinedSteps,
     };
     this.setState({
-      recipe: fixed,
+      recipe: cleaned,
     });
   }
   render() {
@@ -164,7 +179,7 @@ class AddRecipe extends Component {
         <Form onSubmit={recipe => this.handleSubmit(recipe)}>
           {formApi => (
             <div>
-              <form onChange={(formstate, api) => this.handleFormChange(formstate, formApi)} onSubmit={formApi.submitForm} id="addrecipe-form" className="recipe-form">
+              <form onChange={this.handleFormChange(formApi)} onSubmit={formApi.submitForm} id="addrecipe-form" className="recipe-form">
                 <div className="form__recipe-item">
                   <h3>General Recipe Options</h3>
                   <label htmlFor="title">Recipe Name</label>
@@ -185,6 +200,7 @@ class AddRecipe extends Component {
                     min="0"
                     max="12"
                     step="1"
+                    validate={validators.portionsValidate}
                   />
                   <label htmlFor="cooktime">Cooktime in minutes</label>
                   <Text
@@ -195,6 +211,7 @@ class AddRecipe extends Component {
                     min="0"
                     max="300"
                     step="1"
+                    validate={validators.cooktimeValidate}
                   />
                   <label htmlFor="description">Description of the recipe.</label>
                   <TextArea
@@ -206,6 +223,7 @@ class AddRecipe extends Component {
                     wrap="soft"
                     rows="5"
                     cols="25"
+                    validate={validators.descriptionValidate}
                   />
                   <label htmlFor="image">Upload an image</label>
                   <Text
@@ -234,10 +252,21 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item ingredients">
                   <h3>Ingredients</h3>
-                  <Ingredient i="" statusOptions={statusOptions} formApi={formApi} field={[ `ingredientsInitial` ]} initial />
+                  <Ingredient
+                    i=""
+                    statusOptions={statusOptions}
+                    field={[ `ingredientsInitial` ]}
+                    initial
+                  />
                   {formApi.values.ingredients &&
                   formApi.values.ingredients.map((ingredient, i) => (
-                    <Ingredient i={i} statusOptions={statusOptions} formApi={formApi} key={`ingredient${i}`} initial={false} />
+                    <Ingredient
+                      i={i}
+                      statusOptions={statusOptions}
+                      formApi={formApi}
+                      key={`ingredient${i}`}
+                      initial={false}
+                    />
                   ))}
                   <button
                     onClick={() => formApi.addValue(`ingredients`, ``)}
