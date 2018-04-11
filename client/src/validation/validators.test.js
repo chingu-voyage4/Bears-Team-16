@@ -54,4 +54,22 @@ describe(`validators`, () => {
       success: `Thank you for entering a cooking time!`,
     });
   });
+
+  it(`should validate description`, () => {
+    expect(validators.descriptionValidate()).toEqual({
+      error: `Must contain a description.`,
+      warning: null,
+      success: null,
+    });
+    expect(validators.descriptionValidate(`d4ks`)).toEqual({
+      error: null,
+      warning: `Field can only contain between 3 to 150 letters.`,
+      success: null,
+    });
+    expect(validators.descriptionValidate(`Dear you are a lucky bastard.`)).toEqual({
+      error: null,
+      warning: null,
+      success: `Thank you for entering a description!`,
+    });
+  });
 });
