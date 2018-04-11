@@ -108,4 +108,22 @@ describe(`validators`, () => {
       success: `Thank you for entering an amount!`,
     });
   });
+
+  it(`should validate step`, () => {
+    expect(validators.stepValidate()).toEqual({
+      error: `Must contain a step.`,
+      warning: null,
+      success: null,
+    });
+    expect(validators.stepValidate(`d5ks`)).toEqual({
+      error: null,
+      warning: `Field can only contain between 3 to 50 letters.`,
+      success: null,
+    });
+    expect(validators.stepValidate(`Dear you are a lucky bastard.`)).toEqual({
+      error: null,
+      warning: null,
+      success: `Thank you for entering a step!`,
+    });
+  });
 });

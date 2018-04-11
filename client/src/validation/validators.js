@@ -69,3 +69,15 @@ export const ingredientAmountValidate = value => ({
     ? `Thank you for entering an amount!`
     : null,
 });
+
+export const stepValidate = value => ({
+  error: !value
+    ? `Must contain a step.`
+    : null,
+  warning: value && !/^[a-z \.]{3,50}$/gi.test(value)
+    ? `Field can only contain between 3 to 50 letters.`
+    : null,
+  success: value && /^[a-z \.]{3,50}$/gi.test(value)
+    ? `Thank you for entering a step!`
+    : null,
+});
