@@ -57,3 +57,15 @@ export const ingredientNameValidate = value => ({
     ? `Thank you for entering a name for the ingredient!`
     : null,
 });
+
+export const ingredientAmountValidate = value => ({
+  error: !value
+    ? `Must contain an ingredient amount.`
+    : null,
+  warning: value && !/^[0-9]{1,2}$/gi.test(value)
+    ? `Field can only contain at most 2 digits.`
+    : null,
+  success: value && /^[0-9]{1,2}$/gi.test(value)
+    ? `Thank you for entering an amount!`
+    : null,
+});

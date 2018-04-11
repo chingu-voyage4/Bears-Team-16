@@ -90,4 +90,22 @@ describe(`validators`, () => {
       success: `Thank you for entering a name for the ingredient!`,
     });
   });
+
+  it(`should validate ingredient amount`, () => {
+    expect(validators.ingredientAmountValidate()).toEqual({
+      error: `Must contain an ingredient amount.`,
+      warning: null,
+      success: null,
+    });
+    expect(validators.ingredientAmountValidate(`dk4s`)).toEqual({
+      error: null,
+      warning: `Field can only contain at most 2 digits.`,
+      success: null,
+    });
+    expect(validators.ingredientAmountValidate(`34`)).toEqual({
+      error: null,
+      warning: null,
+      success: `Thank you for entering an amount!`,
+    });
+  });
 });
