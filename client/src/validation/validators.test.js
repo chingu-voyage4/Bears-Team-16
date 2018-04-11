@@ -36,4 +36,22 @@ describe(`validators`, () => {
       success: `Thank you for entering a portions amount!`,
     });
   });
+
+  it(`should validate cooking time`, () => {
+    expect(validators.cooktimeValidate()).toEqual({
+      error: `Must contain a cooking time.`,
+      warning: null,
+      success: null,
+    });
+    expect(validators.cooktimeValidate(`2319`)).toEqual({
+      error: null,
+      warning: `Field can only contain at most 3 digits.`,
+      success: null,
+    });
+    expect(validators.cooktimeValidate(`32`)).toEqual({
+      error: null,
+      warning: null,
+      success: `Thank you for entering a cooking time!`,
+    });
+  });
 });
