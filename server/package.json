@@ -2,18 +2,22 @@
   "name": "server",
   "version": "0.1.0",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bookshelf": "^0.12.1",
-    "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.1",
     "graphql-tools": "^2.21.0",
+    "jsonwebtoken": "^8.2.0",
     "knex": "^0.14.4",
     "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.4.1"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -24,13 +28,14 @@
     "chai-http": "^3.0.0",
     "chai-things": "^0.2.0",
     "chance": "^1.0.13",
+    "cors": "^2.8.4",
     "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "mocha": "^5.0.4",
-    "nodemon": "^1.15.1",
+    "nodemon": "^1.17.2",
     "nyc": "^11.4.1",
     "prettier": "^1.10.2",
     "sinon": "^4.4.2",
@@ -46,16 +51,18 @@
     "test":
       "NODE_ENV=test nyc mocha -r babel-register -r babel-polyfill --recursive ./test/ -t 5000 --exit",
     "test-e2e":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 --exit",
+      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/e2e -t 5000 -b --exit",
     "test-integration":
-      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 --exit",
+      "NODE_ENV=test mocha -r babel-register -r babel-polyfill --recursive ./test/integration -t 5000 -b --exit",
     "test-unit":
-      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit --exit",
+      "mocha -r babel-register -r babel-polyfill --recursive ./test/unit -b --exit",
     "tdd": "npm run test-unit -- --watch",
-    "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/db/dbConfig.js",
+    "knex": "babel-node ./node_modules/.bin/knex --knexfile=src/config/db.js",
     "db-migrate": "npm run knex migrate:latest",
     "db-rollback": "npm run knex migrate:rollback",
     "db-seed": "npm run knex seed:run",
-    "db-reseed": "npm run db-rollback && npm run db-migrate && npm run db-seed"
-  }
+    "db-reseed": "npm run db-rollback && npm run db-migrate && npm run db-seed",
+    "heroku-postbuild": "npm install && npm install --only=dev && npm run build"
+  },
+  "cacheDirectories": "node_modules"
 }
