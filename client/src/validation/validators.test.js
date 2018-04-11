@@ -72,4 +72,22 @@ describe(`validators`, () => {
       success: `Thank you for entering a description!`,
     });
   });
+
+  it(`should validate ingredient name`, () => {
+    expect(validators.ingredientNameValidate()).toEqual({
+      error: `Must contain an ingredient name.`,
+      warning: null,
+      success: null,
+    });
+    expect(validators.ingredientNameValidate(`dk4s`)).toEqual({
+      error: null,
+      warning: `Field can only contain between 3 to 25 letters.`,
+      success: null,
+    });
+    expect(validators.ingredientNameValidate(`Carrots`)).toEqual({
+      error: null,
+      warning: null,
+      success: `Thank you for entering a name for the ingredient!`,
+    });
+  });
 });

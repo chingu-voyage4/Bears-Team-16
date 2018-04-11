@@ -45,3 +45,15 @@ export const descriptionValidate = value => ({
     ? `Thank you for entering a description!`
     : null,
 });
+
+export const ingredientNameValidate = value => ({
+  error: !value
+    ? `Must contain an ingredient name.`
+    : null,
+  warning: value && !/^[a-z ]{3,25}$/gi.test(value)
+    ? `Field can only contain between 3 to 25 letters.`
+    : null,
+  success: value && /^[a-z ]{3,25}$/gi.test(value)
+    ? `Thank you for entering a name for the ingredient!`
+    : null,
+});
