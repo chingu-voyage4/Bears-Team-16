@@ -1,72 +1,75 @@
 import React, { Component } from "react";
 import { Form, Text, Checkbox, NestedField, Select, TextArea } from "react-form";
+import * as validators from '../../validation/validators';
 
 const Ingredient = (props) => {
   const {
     i, statusOptions, formApi, initial, field,
   } = props;
   return initial ?
-    (<NestedField field={field}>
-      <label htmlFor="ingredient-name-initial">
+    (
+      <NestedField field={field}>
+        <label htmlFor="ingredient-name-initial">
 Ingredient
-      </label>
-      <Text
-        field="ingredient-name"
-        id="ingredient-name-initial"
-        placeholder="Ingredient name"
-      />
-      <label htmlFor="ingredient-amount-initial">Amount</label>
-      <Text
-        field="ingredient-amount"
-        id="ingredient-amount-initial"
-        type="number"
-        min="0"
-        max="100"
-        placeholder="Amount"
-      />
-      <label htmlFor="ingredient-unit-initial">Unit</label>
-      <Select
-        field="ingredient-unit"
-        id="ingredient-unit-initial"
-        options={statusOptions}
-        placeholder="Select unit"
-      />
-     </NestedField>)
-    : (<div key={`ingredient${i}`}>
-      <NestedField field={[ `ingredients`, i ]}>
-        <label htmlFor={`ingredient-name-${i}`}>
-    Ingredient
         </label>
         <Text
           field="ingredient-name"
-          id={`ingredient-name-${i}`}
+          id="ingredient-name-initial"
           placeholder="Ingredient name"
         />
-        <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
+        <label htmlFor="ingredient-amount-initial">Amount</label>
         <Text
           field="ingredient-amount"
-          id={`ingredient-amount-${i}`}
+          id="ingredient-amount-initial"
           type="number"
           min="0"
           max="100"
           placeholder="Amount"
         />
-        <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
+        <label htmlFor="ingredient-unit-initial">Unit</label>
         <Select
           field="ingredient-unit"
-          id={`ingredient-unit-${i}`}
+          id="ingredient-unit-initial"
           options={statusOptions}
           placeholder="Select unit"
         />
+      </NestedField>)
+    : (
+      <div key={`ingredient${i}`}>
+        <NestedField field={[ `ingredients`, i ]}>
+          <label htmlFor={`ingredient-name-${i}`}>
+    Ingredient
+          </label>
+          <Text
+            field="ingredient-name"
+            id={`ingredient-name-${i}`}
+            placeholder="Ingredient name"
+          />
+          <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
+          <Text
+            field="ingredient-amount"
+            id={`ingredient-amount-${i}`}
+            type="number"
+            min="0"
+            max="100"
+            placeholder="Amount"
+          />
+          <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
+          <Select
+            field="ingredient-unit"
+            id={`ingredient-unit-${i}`}
+            options={statusOptions}
+            placeholder="Select unit"
+          />
 
-        <button
-          onClick={() => formApi.removeValue(`ingredients`, i)}
-          type="button"
-        >
+          <button
+            onClick={() => formApi.removeValue(`ingredients`, i)}
+            type="button"
+          >
     Remove
-        </button>
-      </NestedField>
-    </div>);
+          </button>
+        </NestedField>
+      </div>);
 };
 
 const Step = (props) => {
@@ -81,18 +84,19 @@ const Step = (props) => {
       <Text field={[ `stepInitial` ]} id="stepInitial" />
     </div>)
     :
-    (<div>
-      <label htmlFor={id}>
+    (
+      <div>
+        <label htmlFor={id}>
                         Step {`${i + 2}`}
-      </label>
-      <Text field={field} id={id} />
-      <button
-        onClick={() => formApi.removeValue(`steps`, i)}
-        type="button"
-      >
+        </label>
+        <Text field={field} id={id} />
+        <button
+          onClick={() => formApi.removeValue(`steps`, i)}
+          type="button"
+        >
                         Remove
-      </button>
-     </div>);
+        </button>
+      </div>);
 };
 class AddRecipe extends Component {
   constructor(props) {
@@ -101,7 +105,16 @@ class AddRecipe extends Component {
       recipe: null,
     };
   }
+  handleFormChange(formstate, api) {
+    // console.log(formstate, `formstate`);
+    // console.log(api, `touched`);
+    console.log(api.errors, `errors`);
+    console.log(api.warnings, `warnings`);
+    console.log(api.successes, `successes`);
+  }
+
   handleSubmit(recipe) {
+    console.log(recipe);
     const {
       title, portions, cooktime, description, categories, ingredients, ingredientsInitial, steps, stepInitial,
     } = recipe;
@@ -151,7 +164,7 @@ class AddRecipe extends Component {
         <Form onSubmit={recipe => this.handleSubmit(recipe)}>
           {formApi => (
             <div>
-              <form onSubmit={formApi.submitForm} id="addrecipe-form" className="recipe-form">
+              <form onChange={(formstate, api) => this.handleFormChange(formstate, formApi)} onSubmit={formApi.submitForm} id="addrecipe-form" className="recipe-form">
                 <div className="form__recipe-item">
                   <h3>General Recipe Options</h3>
                   <label htmlFor="title">Recipe Name</label>
@@ -161,6 +174,7 @@ class AddRecipe extends Component {
                     placeholder="ex. Jambalaya"
                     type="text"
                     className="recipe-title"
+                    validate={validators.titleValidate}
                   />
                   <label htmlFor="portions">Portions</label>
                   <Text
@@ -171,7 +185,6 @@ class AddRecipe extends Component {
                     min="0"
                     max="12"
                     step="1"
-                    className="portis"
                   />
                   <label htmlFor="cooktime">Cooktime in minutes</label>
                   <Text
@@ -189,10 +202,18 @@ class AddRecipe extends Component {
                     field="description"
                     placeholder="ex. Spicy dish that goes well with a cool lager."
                     type="text"
-                    maxlength="256"
+                    maxLength="256"
                     wrap="soft"
                     rows="5"
                     cols="25"
+                  />
+                  <label htmlFor="image">Upload an image</label>
+                  <Text
+                    id="image"
+                    field="image"
+                    placeholder="ex. 45"
+                    type="file"
+                    accept="image/*"
                   />
                 </div>
                 <div className="form__recipe-item">

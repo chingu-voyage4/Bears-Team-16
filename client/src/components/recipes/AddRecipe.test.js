@@ -48,6 +48,12 @@ describe(`<AddRecipe />`, () => {
     expect(wrapper.find(`textarea#description`).length).toEqual(1);
   });
 
+  it(`should have an upload image input`, () => {
+    const wrapper = mount(<AddRecipe />);
+    expect(wrapper.find(`[htmlFor="image"]`).length).toEqual(1);
+    expect(wrapper.find(`input#image`).length).toEqual(1);
+  });
+
   it(`should have a NestedField with a class of recipe-categories`, () => {
     const wrapper = mount(<AddRecipe />);
     expect(wrapper.find(NestedField).length).toEqual(2);
