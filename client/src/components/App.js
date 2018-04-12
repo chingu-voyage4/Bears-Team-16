@@ -45,11 +45,13 @@ export default class extends React.Component {
         <Router basename={process.env.PUBLIC_URL}>
           <div>
             <Header />
+              <div style={{  minHeight: `calc(100vh - 200px)` }}>
             <Route exact path="/" component={Home} />
             <Route path="/signin" component={Signin} />
             <Route path="/browse" component={Browse} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+              </div>
             <Footer />
           </div>
         </Router>
