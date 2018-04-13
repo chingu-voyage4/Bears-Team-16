@@ -47,20 +47,15 @@ export const descriptionValidate = value => ({
 });
 
 export const categoriesValidate = value => {
-  // console.log(value);
-  const touched = Object.values(value);
-  const selected = touched.filter(select => select === true);
-  const amount = selected.length;
-  console.log(selected, `selectedArr`);
-  console.log(amount, `count`);
+  const selected = Object.values(value).filter(select => select === true);
   return ({
-    error: !value || amount === 0
+    error: !value || selected.length === 0
       ? `Must contain a category.`
       : null,
-    warning: amount > 0 && amount > 5
+    warning: selected.length > 0 && selected.length > 5
       ? `Field can only contain between 1 and 5 categories.`
       : null,
-    success: amount > 0 && amount < 6
+    success: selected.length > 0 && selected.length < 6
       ? `Thank you for selecting categories!`
       : null,
   });
