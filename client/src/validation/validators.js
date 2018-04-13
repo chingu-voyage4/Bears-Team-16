@@ -48,30 +48,39 @@ export const descriptionValidate = value => ({
 
 export const categoriesValidate = value => {
   const selected = Object.values(value).filter(select => select === true);
-  return ({
-    error: !value || selected.length === 0
+  return {
+    error: !value || selected.length === 0 // !value is redundant bc it will always be an object (truthy)
       ? `Must contain a category.`
       : null,
-    warning: selected.length > 0 && selected.length > 5
+    warning: selected.length > 0 && selected.length > 5 // This will fire only on > 5
       ? `Field can only contain between 1 and 5 categories.`
       : null,
     success: selected.length > 0 && selected.length < 6
       ? `Thank you for selecting categories!`
       : null,
-  });
+  };
 };
 
-export const ingredientNameValidate = value => ({
-  error: !value
-    ? `Must contain an ingredient name.`
-    : null,
-  warning: value && !/^[a-z ]{3,25}$/gi.test(value)
-    ? `Field can only contain between 3 to 25 letters.`
-    : null,
-  success: value && /^[a-z ]{3,25}$/gi.test(value)
-    ? `Thank you for entering a name for the ingredient!`
-    : null,
-});
+
+export const ingredient = value => {
+  console.log({ ingredientVakidate: value });
+};
+
+export const ingredientNameValidate = value => {
+  console.log({ value });
+
+  return {
+    error: !value
+      ? `Must contain an ingredient name.`
+      : null,
+    warning: value && !/^[a-z ]{3,25}$/gi.test(value)
+      ? `Field can only contain between 3 to 25 letters.`
+      : null,
+    success: value && /^[a-z ]{3,25}$/gi.test(value)
+      ? `Thank you for entering a name for the ingredient!`
+      : null,
+  };
+};
 
 export const ingredientAmountValidate = value => ({
   error: !value
@@ -85,15 +94,19 @@ export const ingredientAmountValidate = value => ({
     : null,
 });
 
-export const ingredientUnitValidate = value => ({
-  error: !value
-    ? `Must select an ingredient unit.`
-    : null,
-  warning: null,
-  success: value
-    ? `Thank you for entering a unit!`
-    : null,
-});
+export const ingredientUnitValidate = value => {
+  console.log({ value });
+
+  return {
+    error: !value
+      ? `Must select an ingredient unit.`
+      : null,
+    warning: null,
+    success: value
+      ? `Thank you for entering a unit!`
+      : null,
+  };
+};
 
 export const stepValidate = value => ({
   error: !value

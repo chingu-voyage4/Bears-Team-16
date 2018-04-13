@@ -85,6 +85,57 @@ Ingredient
       </div>);
 };
 
+const IngredientAlt = props => {
+  const i = props.field[1];
+  console.log({ props });
+
+
+  const statusOptions = [
+    {
+      label: `Pcs`,
+      value: `pcs`,
+    },
+    {
+      label: `Liter`,
+      value: `liter`,
+    },
+    {
+      label: `Kilogram`,
+      value: `kg`,
+    },
+  ];
+  return (
+    <div>
+      <label htmlFor={`ingredient-name-${i}`}>
+    Ingredient
+      </label>
+      <Text
+        field="ingredient-name"
+        id={`ingredient-name-${i}`}
+        placeholder="Ingredient name"
+        validate={props.validate}
+      />
+      <label htmlFor={`ingredient-amount-${i}`}>Amount</label>
+      <Text
+        field="ingredient-amount"
+        id={`ingredient-amount-${i}`}
+        type="number"
+        min="0"
+        max="100"
+        placeholder="Amount"
+        validate={validators.ingredientAmountValidate}
+      />
+      <label htmlFor={`ingredient-unit-${i}`}>Unit</label>
+      <Select
+        field="ingredient-unit"
+        id={`ingredient-unit-${i}`}
+        options={statusOptions}
+        placeholder="Select unit"
+        validate={validators.ingredientUnitValidate}
+      />
+    </div>);
+};
+
 const Step = (props) => {
   const {
     i, formApi, id, field, initial,
@@ -129,10 +180,10 @@ class AddRecipe extends Component {
   handleFormChange(api) {
     // console.log(formstate, `formstate`);
     // console.log(api, `touched`);
-    console.log(api.errors, `errors`);
-    console.log(api.warnings, `warnings`);
-    console.log(api.successes, `successes`);
-    console.log(api.values, `value`);
+    // console.log(api.errors, `errors`);
+    // console.log(api.warnings, `warnings`);
+    // console.log(api.successes, `successes`);
+    console.log(`API`, api);
   }
 
   handleSubmit(recipe) {
@@ -161,6 +212,7 @@ class AddRecipe extends Component {
       recipe: cleaned,
     });
   }
+
   render() {
     console.log(this.state.recipe);
     const style = {
@@ -263,7 +315,7 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item ingredients">
                   <h3>Ingredients</h3>
-                  <Ingredient
+                  {/* <Ingredient
                     i=""
                     statusOptions={statusOptions}
                     field={[ `ingredientsInitial` ]}
@@ -284,7 +336,27 @@ class AddRecipe extends Component {
                     type="button"
                   >
                   Add Ingredient
-                  </button>
+                  </button> */}
+                  {
+                    formApi.values.ingredients &&
+                    formApi.values.ingredients.map((ing, i) => (
+                      <div>
+                        <NestedField
+                          field={[ `ingredients`, i ]}
+                          component={IngredientAlt}
+                          validate={validators.ingredient}
+                        />
+                        <div>{formApi.errors && formApi.errors.ingredients && `Error`}</div>
+                      </div>
+                      ))}
+                  {
+                    (!formApi.values.ingredients || formApi.values.ingredients.every(i => !!i[`ingredient-name`])) &&
+                    <NestedField
+                      field={[ `ingredients`, (formApi.values.ingredients && formApi.values.ingredients.length) || 0 ]}
+                      component={IngredientAlt}
+                      validate={validators.ingredient}
+                    />
+                  }
                 </div>
                 <div className="form__recipe-item steps">
                   <h3>Cooking steps</h3>
