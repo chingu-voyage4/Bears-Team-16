@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { Form, Text, Checkbox, NestedField, Select, TextArea } from "react-form";
 import * as validators from '../../validation/validators';
 
+const Category = (props) => (
+  <div>
+    <label htmlFor={props.category}>{props.category}</label>
+    <Checkbox field={props.category} id={props.category} />
+  </div>
+);
+
 const Ingredient = (props) => {
   const {
     i, statusOptions, formApi, initial, field,
@@ -125,7 +132,7 @@ class AddRecipe extends Component {
     console.log(api.errors, `errors`);
     console.log(api.warnings, `warnings`);
     console.log(api.successes, `successes`);
-    // console.log(api, `value`);
+    console.log(api.values, `value`);
   }
 
   handleSubmit(recipe) {
@@ -159,6 +166,14 @@ class AddRecipe extends Component {
     const style = {
       display: `none`,
     };
+    const categories = [
+      `Beef`,
+      `Pasta`,
+      `Pork`,
+      `Fish`,
+      `Veggie`,
+      `Dessert`,
+    ];
     const statusOptions = [
       {
         label: `Pcs`,
@@ -236,23 +251,15 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item">
                   <h3>Categories</h3>
-                  <NestedField field="categories" className="recipe-categories" validate={validators.categoriesValidate}>
-                    <label htmlFor="beef">beef</label>
-                    <Checkbox field="beef" id="beef" />
-                    <br />
-                    <label htmlFor="fish">fish</label>
-                    <Checkbox field="fish" id="fish" />
-                    <br />
-                    <label htmlFor="pork">pork</label>
-                    <Checkbox field="pork" id="pork" />
-                    <br />
-                    <label htmlFor="pasta">pasta</label>
-                    <Checkbox field="pasta" id="pasta" />
-                    <label htmlFor="ruber">ruber</label>
-                    <Checkbox field="ruber" id="ruber" />
-                    <label htmlFor="ljaksdf">ljaksdf</label>
-                    <Checkbox field="ljaksdf" id="ljaksdf" />
-                  </NestedField>
+                  <div className="categories">
+                    <NestedField
+                      field="categories"
+                      className="recipe-categories"
+                      validate={validators.categoriesValidate}
+                    >
+                      {categories.map(category => <Category category={category} />)}
+                    </NestedField>
+                  </div>
                 </div>
                 <div className="form__recipe-item ingredients">
                   <h3>Ingredients</h3>
