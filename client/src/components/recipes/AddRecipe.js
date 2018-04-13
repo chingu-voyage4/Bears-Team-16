@@ -122,10 +122,10 @@ class AddRecipe extends Component {
   handleFormChange(api) {
     // console.log(formstate, `formstate`);
     // console.log(api, `touched`);
-    // console.log(api.errors, `errors`);
-    // console.log(api.warnings, `warnings`);
-    // console.log(api.successes, `successes`);
-    console.log(api, `value`);
+    console.log(api.errors, `errors`);
+    console.log(api.warnings, `warnings`);
+    console.log(api.successes, `successes`);
+    // console.log(api, `value`);
   }
 
   handleSubmit(recipe) {
@@ -236,9 +236,9 @@ class AddRecipe extends Component {
                 </div>
                 <div className="form__recipe-item">
                   <h3>Categories</h3>
-                  <NestedField field="categories" className="recipe-categories">
+                  <NestedField field="categories" className="recipe-categories" validate={validators.categoriesValidate}>
                     <label htmlFor="beef">beef</label>
-                    <Checkbox field="beef" id="beef" validate={validators.categoriesValidate} />
+                    <Checkbox field="beef" id="beef" />
                     <br />
                     <label htmlFor="fish">fish</label>
                     <Checkbox field="fish" id="fish" />
@@ -248,6 +248,10 @@ class AddRecipe extends Component {
                     <br />
                     <label htmlFor="pasta">pasta</label>
                     <Checkbox field="pasta" id="pasta" />
+                    <label htmlFor="ruber">ruber</label>
+                    <Checkbox field="ruber" id="ruber" />
+                    <label htmlFor="ljaksdf">ljaksdf</label>
+                    <Checkbox field="ljaksdf" id="ljaksdf" />
                   </NestedField>
                 </div>
                 <div className="form__recipe-item ingredients">
