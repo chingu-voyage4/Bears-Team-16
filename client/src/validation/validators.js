@@ -46,6 +46,11 @@ export const descriptionValidate = value => ({
     : null,
 });
 
+export const categoriesValidate = value => {
+  console.log(value);
+  return { error: `ERROR` };
+};
+
 export const ingredientNameValidate = value => ({
   error: !value
     ? `Must contain an ingredient name.`
@@ -67,6 +72,16 @@ export const ingredientAmountValidate = value => ({
     : null,
   success: value && /^[0-9]{1,2}$/gi.test(value)
     ? `Thank you for entering an amount!`
+    : null,
+});
+
+export const ingredientUnitValidate = value => ({
+  error: !value
+    ? `Must select an ingredient unit.`
+    : null,
+  warning: null,
+  success: value
+    ? `Thank you for entering a unit!`
     : null,
 });
 

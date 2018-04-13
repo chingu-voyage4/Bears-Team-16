@@ -34,7 +34,7 @@ Ingredient
           id="ingredient-unit-initial"
           options={statusOptions}
           placeholder="Select unit"
-            // validate={validators.ingredientUnitValidate}
+          validate={validators.ingredientUnitValidate}
         />
       </NestedField>)
     : (
@@ -125,7 +125,7 @@ class AddRecipe extends Component {
     // console.log(api.errors, `errors`);
     // console.log(api.warnings, `warnings`);
     // console.log(api.successes, `successes`);
-    console.log(api.values, `value`);
+    console.log(api, `value`);
   }
 
   handleSubmit(recipe) {
@@ -238,16 +238,16 @@ class AddRecipe extends Component {
                   <h3>Categories</h3>
                   <NestedField field="categories" className="recipe-categories">
                     <label htmlFor="beef">beef</label>
-                    <Checkbox field="beef" id="beef" style={style} />
+                    <Checkbox field="beef" id="beef" validate={validators.categoriesValidate} />
                     <br />
                     <label htmlFor="fish">fish</label>
-                    <Checkbox field="fish" id="fish" style={style} />
+                    <Checkbox field="fish" id="fish" />
                     <br />
                     <label htmlFor="pork">pork</label>
-                    <Checkbox field="pork" id="pork" style={style} />
+                    <Checkbox field="pork" id="pork" />
                     <br />
                     <label htmlFor="pasta">pasta</label>
-                    <Checkbox field="pasta" id="pasta" style={style} />
+                    <Checkbox field="pasta" id="pasta" />
                   </NestedField>
                 </div>
                 <div className="form__recipe-item ingredients">
