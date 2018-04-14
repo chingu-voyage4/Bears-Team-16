@@ -309,7 +309,26 @@ class AddRecipe extends Component {
                       className="recipe-categories"
                       validate={validators.categoriesValidate}
                     >
-                      {categories.map(category => <Category category={category} />)}
+                      {categories.map(category => {
+                        const isSelected = formApi.values.categories && !!formApi.values.categories[category]
+                          return (<div key={category}>
+                            <label
+                              htmlFor={category}
+                              style={{ 
+                                color: `${isSelected ? "#82bf84" : "black"}`, 
+                                fontWeight: `${isSelected ? `700` : `400`}` }}
+                            >{category}
+                            </label>  
+                            <Checkbox field={category} id={category} style={{opacity: "0"}}/>
+                          </div>);
+                      })}
+                      {
+                        formApi.touched.categories && formApi.errors
+                          ? <div style={{ color: `crimson`, fontWeight: `700` }}>{formApi.errors.categories || null}</div>
+                          : formApi.warnings
+                            ? <div style={{ color: `gold`, fontWeight: `700` }}>{formApi.warnings.categories || null}</div>
+                            : null
+                      }
                     </NestedField>
                   </div>
                 </div>
@@ -340,7 +359,7 @@ class AddRecipe extends Component {
                   {
                     formApi.values.ingredients &&
                     formApi.values.ingredients.map((ing, i) => (
-                      <div>
+                      <div key={`ingredient${i}`}>
                         <NestedField
                           field={[ `ingredients`, i ]}
                           component={IngredientAlt}
