@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 /* LAYOUT COMPONENTS */
 import Header from "./layout/Header/Header";
 import Footer from "./layout/Footer/Footer";
+import RecipeSingleView from "./recipes/RecipeSingleView/RecipeSingleView";
 import Home from "./layout/Home";
 import About from "./layout/About";
 import Browse from "./layout/Browse";
@@ -51,6 +52,7 @@ export default class extends React.Component {
             <Route path="/browse" component={Browse} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+                  <Route path="/recipe" component={RecipeSingleView} />
               </div>
             <Footer />
           </div>

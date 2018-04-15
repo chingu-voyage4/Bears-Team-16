@@ -1,0 +1,44 @@
+.recipe-single-view {
+    padding: 50px 50px;
+    margin-bottom: 150px;
+}
+
+ul {
+    list-style: none;
+}
+
+h2 {
+    font-size: 60px;
+    font-weight: 500;
+}
+
+.left {
+    float: left;
+    width: 45vw;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.right {
+    float: left;
+    width: 45vw;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.recipe-single-view-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.recipe-single-view-category {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.recipe-single-view-category li {
+
+}
